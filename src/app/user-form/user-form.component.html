@@ -1,0 +1,16 @@
+<h3>Cadastro</h3>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <label for="name">
+    Nome:
+    <input type="text" formControlName="name">
+  </label>
+  <br>
+  <label for="username">
+    Username:
+    <input type="text" formControlName="username">
+  </label>
+    
+    <br>
+    <button type="submit" [disabled]="!userForm.valid">Salvar</button>
+</form>

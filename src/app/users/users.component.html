@@ -1,4 +1,5 @@
 <h2>Usuários</h2>
+<div *ngIf="users"></div>
 <table>
   <tr>
     <td>Id</td>
@@ -15,3 +16,5 @@
     <td>{{user.email}}</td>
   </tr>
 </table>
+
+<app-user-form (newUserEvent)="addUser($event)" ></app-user-form>
