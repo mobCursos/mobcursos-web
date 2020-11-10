@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validator, Validators } from '@angular/forms';
 import { User } from '../interfaces/user';
 
 @Component({
@@ -14,11 +14,14 @@ export class UserFormComponent implements OnInit {
   user: User;
   @Output() newUserEvent = new EventEmitter<any>();
 
-  message = 'inicio';
+  roles = ['admin', 'teacher', 'student'];
 
   userForm = this.fb.group({
-    name: [''],
-    username: ['']
+    _id: [''],
+    role: ['', Validators.required],
+    name: ['', Validators.required],
+    username: ['', Validators.required],
+    email: ['', Validators.email],
   });
   
 
