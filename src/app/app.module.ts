@@ -5,12 +5,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserFilterPipe } from './user-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    UserFormComponent
+    UserFormComponent,
+    UserFilterPipe
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@
     Categoria
     <select formControlName="role">
       <option *ngFor="let role of roles" [ngValue]="role">
-        {{role}}
+        {{role | titlecase}}
       </option>
     </select>
   </label>

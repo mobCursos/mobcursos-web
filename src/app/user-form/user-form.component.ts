@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validator, Validators } from '@angular/forms';
 import { User } from '../interfaces/user';
+import { ROLES } from '../mocks/user-roles';
 
 @Component({
   selector: 'app-user-form',
@@ -14,7 +15,7 @@ export class UserFormComponent implements OnInit {
   user: User;
   @Output() newUserEvent = new EventEmitter<any>();
 
-  roles = ['admin', 'teacher', 'student'];
+  roles = ROLES;
 
   userForm = this.fb.group({
     _id: [''],

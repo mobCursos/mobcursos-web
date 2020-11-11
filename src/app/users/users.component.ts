@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces/user';
+import { ROLES } from '../mocks/user-roles';
 import { UserService } from "../user.service";
 
 @Component({
@@ -10,6 +11,8 @@ import { UserService } from "../user.service";
 export class UsersComponent implements OnInit {
 
   users: User[];
+  roles = ROLES;
+  roleFilter = "";
 
   constructor(private userService: UserService) { }
 
