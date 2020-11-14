@@ -14,6 +14,7 @@ export class UserFormComponent implements OnInit {
 
   user: User;
   @Output() newUserEvent = new EventEmitter<any>();
+  @Output() deleteUserEvent = new EventEmitter<any>();
 
   roles = ROLES;
 
@@ -32,6 +33,12 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     console.warn(this.userForm.value);
     this.newUserEvent.emit(this.userForm.value)
+  }
+
+  onDelete(id: string) {
+    // TODO: implement 
+    console.warn(id);
+    // this.deleteUserEvent.emit(id);
   }
 
 
