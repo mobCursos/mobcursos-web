@@ -31,8 +31,9 @@
   </label>
     
   <br>
-  <button type="submit" [disabled]="!userForm.valid">Salvar</button>
+  <input type="submit" [disabled]="!userForm.valid" value="Salvar">
+  
 </form>
 
-<br>
-<button (click)="onDelete('1')">Delete</button>
+<button (click)="onReset()">{{resetButtonText}}</button>
+<button (click)="goBack()">{{backButtonText}}</button>

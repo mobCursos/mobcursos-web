@@ -8,7 +8,7 @@ import { User } from './interfaces/user';
 export class UserFilterPipe implements PipeTransform {
 
   getUserByRole(user: User, role: string){
-    return user.role == role;
+    return user.role.toLowerCase() == role.toLowerCase()
   }
   
   transform(users: User[], role: string) {

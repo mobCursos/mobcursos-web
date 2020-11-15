@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from '../interfaces/user';
 import { ROLES } from '../mocks/user-roles';
 import { UserService } from "../user.service";
@@ -10,9 +10,12 @@ import { UserService } from "../user.service";
 })
 export class UsersComponent implements OnInit {
 
+  // @Output() selectUserEvent = new EventEmitter<any>();
+
   users: User[];
   roles = ROLES;
   roleFilter = "";
+  // selectedUser: User;
 
   constructor(private userService: UserService) { }
 
@@ -21,12 +24,18 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.users = this.userService.getUsers();
-        // .subscribe(users => this.users = users);
+    this.userService.getUsers()
+      .subscribe(users => this.users = users);
   }
 
   addUser(newUser: User) {
     this.users.push(newUser);
   }
+
+  // onEdit(user: User): void {
+  //   this.selectedUser = user;
+  //   console.warn(this.selectedUser);
+  //   // this.selectUserEvent.emit()
+  // }
 
 }
