@@ -1,0 +1,104 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validator, Validators } from '@angular/forms';
+import { ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
+import { UserService } from "../user.service";
+import { User } from '../interfaces/user';
+import { ROLES } from '../mocks/user-roles';
+
+@Component({
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.css']
+})
+export class UserFormComponent implements OnInit {
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private location: Location
+    ) { }
+
+  user: User;
+
+  roles = ROLES;
+
+  userForm = this.fb.group({
+    _id: [''],
+    role: ['', Validators.required],
+    name: ['', Validators.required],
+    username: ['', Validators.required],
+    email: ['', [Validators.email, Validators.required] ],
+  });
+
+  id:string = this.route.snapshot.paramMap.get('id');
+
+  resetButtonText: string = "Limpar";
+  backButtonText: string = "Voltar";
+  
+
+  ngOnInit(): void {
+    /** ONLY FOR DEVELOPMENT/TESTS */
+    // console.warn("Rota: ",this.route.snapshot.routeConfig.path);
+    if (this.route.snapshot.routeConfig.path == "users/random") {
+      this.userForm.patchValue(this.getMockUser());
+    }
+    else if(this.id){
+      this.getUser();
+      this.userForm.patchValue(this.user);
+    }
+    
+    // this.userForm.get('_id').disable(); /** TODO: automatic id from server */
+  }
+
+  getUser(): void {
+    const id:string = this.id;
+    this.userService.getUser(id)
+      .subscribe(user => this.user = user);
+    console.warn('GET USER: ', this.user)
+  }
+
+  onSubmit() {
+    console.warn("_id: ", this.userForm.value._id);
+    if(this.userForm.value._id) {
+      console.warn('UPDATE')
+      this.userService.updateUser(this.userForm.value)
+      .subscribe(() => this.goBack())
+    } else {
+      console.warn('CREATE')
+      this.userService.createUser(this.userForm.value)
+      .subscribe(() => this.goBack())
+    }
+  }
+
+  onReset(): void {
+    this.userForm.reset();
+  }
+  goBack(): void {
+    this.onReset();
+    this.location.back();
+  }  
+  
+  /** ONLY FOR DEVELOPMENT/TESTS */
+  getMockUser() {
+    
+    const mockRoleIndex = Math.floor(Math.random() * 3); /* 0 a 2 */
+    const mockRole = ROLES[mockRoleIndex];
+    const mockUserNumber = (100 + Math.floor(Math.random() * 900)).toString();  /* 100 a 999 */
+    const mockUser = mockRole + mockUserNumber;
+    
+    const user = {
+      "courses": [],
+      "_id": "",
+      "role": mockRole,
+      "name": mockUser,
+      "avatar": "",
+      "username": mockUser,
+      "password": "password",
+      "email": mockUser + "@gmail.com", 
+    }
+    return user
+  }
+
+}

@@ -5,11 +5,10 @@
               <!-- <ion-icon name="menu-sharp"></ion-icon> -->
           </a>
           <ul class="main-nav js--main-nav">
-              <!-- <li><a href="#home">Home</a></li>
-              <li><a href="login.html">Entrar</a></li>
-              <li><a href="#cursos">Cursos</a></li>
-              <li><a href="#planos-individuais">Planos</a></li>
-              <li><a href="#depoimentos">Depoimentos</a></li> -->
+              <li><a routerLink="/">Home</a></li>
+              <li><a routerLink="/login">Entrar</a></li>
+              <!-- TODO ADMIN AUTH -->
+              <li><a routerLink="/users">Usuários</a></li>
           </ul>
       </div>
       <!-- <img src="resources/img/logo-blue0.png" alt="logo mobCursos" class="logo"> -->
@@ -22,4 +21,4 @@
   </div>
 </div>
 
-<app-users></app-users>
+<router-outlet></router-outlet>

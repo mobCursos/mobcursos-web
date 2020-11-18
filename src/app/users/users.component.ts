@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from '../interfaces/user';
-import { USERS } from '../mocks/users';
+import { ROLES } from '../mocks/user-roles';
+import { UserService } from "../user.service";
+
 
 @Component({
   selector: 'app-users',
@@ -9,11 +11,22 @@ import { USERS } from '../mocks/users';
 })
 export class UsersComponent implements OnInit {
 
-  users: User[] = USERS;
+  users: User[];
+  roles = ROLES;
+  roleFilter = "";
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getUsers();
   }
 
+  getUsers(): void {
+    this.userService.getUsers()
+      .subscribe(users => this.users = users);
+  }
+
+  removeUser(id: string) {
+    this.userService.deleteUser(id);
+  }
 }

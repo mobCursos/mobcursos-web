@@ -1,12 +1,12 @@
 import { Course } from './course';
 
 export interface User {
-  _id: String,
-  role: String,
-  name: String,
-  avatar: String,
-  username: String,
-  password: String,
-  email: String,
+  _id?: string,
+  role: string,
+  name: string,
+  avatar?: string,
+  username: string,
+  password?: string,
+  email: string,
   courses?: Course[]
 }
