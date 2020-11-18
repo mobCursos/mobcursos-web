@@ -54,11 +54,16 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.userForm.value);
-    this.userService.updateUser(this.userForm.value)
+    console.warn("_id: ", this.userForm.value._id);
+    if(this.userForm.value._id) {
+      console.warn('UPDATE')
+      this.userService.updateUser(this.userForm.value)
       .subscribe(() => this.goBack())
-
-    /** TODO: diferenciar new de update conforme _id*/
+    } else {
+      console.warn('CREATE')
+      this.userService.createUser(this.userForm.value)
+      .subscribe(() => this.goBack())
+    }
   }
 
   onReset(): void {
@@ -67,7 +72,6 @@ export class UserFormComponent implements OnInit {
   goBack(): void {
     this.onReset();
     this.location.back();
-
   }
 
 }

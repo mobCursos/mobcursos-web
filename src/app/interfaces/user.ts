@@ -1,7 +1,7 @@
 import { Course } from './course';
 
 export interface User {
-  _id: String,
+  _id?: String,
   role: String,
   name: String,
   avatar?: String,

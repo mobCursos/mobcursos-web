@@ -10,12 +10,9 @@ import { UserService } from "../user.service";
 })
 export class UsersComponent implements OnInit {
 
-  // @Output() selectUserEvent = new EventEmitter<any>();
-
   users: User[];
   roles = ROLES;
   roleFilter = "";
-  // selectedUser: User;
 
   constructor(private userService: UserService) { }
 
@@ -31,11 +28,5 @@ export class UsersComponent implements OnInit {
   addUser(newUser: User) {
     this.users.push(newUser);
   }
-
-  // onEdit(user: User): void {
-  //   this.selectedUser = user;
-  //   console.warn(this.selectedUser);
-  //   // this.selectUserEvent.emit()
-  // }
 
 }
