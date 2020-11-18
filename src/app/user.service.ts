@@ -52,4 +52,15 @@ export class UserService {
     return of(USERS);
   }
 
+  /** TODO: Delete user on the server*/
+  deleteUser(id: string) {
+    const index = USERS.findIndex(
+      (users) => {
+        return users._id == id; 
+      }
+    )
+    USERS.splice(index, 1);
+  }
+
+
 }

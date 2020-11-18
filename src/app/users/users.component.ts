@@ -25,8 +25,8 @@ export class UsersComponent implements OnInit {
       .subscribe(users => this.users = users);
   }
 
-  addUser(newUser: User) {
-    this.users.push(newUser);
+  removeUser(id: string) {
+    this.userService.deleteUser(id);
   }
 
 }

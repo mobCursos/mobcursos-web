@@ -28,5 +28,6 @@
     <td>{{user.username}}</td>
     <td>{{user.email}}</td>
     <button routerLink="edit/{{user._id}}">Editar</button>
+    <button (click)="removeUser(user_id)">Deletar</button>
   </tr>
 </table>
