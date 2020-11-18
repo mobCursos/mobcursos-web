@@ -39,10 +39,16 @@ export class UserFormComponent implements OnInit {
   
 
   ngOnInit(): void {
-    if(this.id){
+    /** ONLY FOR DEVELOPMENT/TESTS */
+    // console.warn("Rota: ",this.route.snapshot.routeConfig.path);
+    if (this.route.snapshot.routeConfig.path == "users/random") {
+      this.userForm.patchValue(this.getMockUser());
+    }
+    else if(this.id){
       this.getUser();
       this.userForm.patchValue(this.user);
     }
+    
     // this.userForm.get('_id').disable(); /** TODO: automatic id from server */
   }
 
@@ -72,6 +78,27 @@ export class UserFormComponent implements OnInit {
   goBack(): void {
     this.onReset();
     this.location.back();
+  }  
+  
+  /** ONLY FOR DEVELOPMENT/TESTS */
+  getMockUser() {
+    
+    const mockRoleIndex = Math.floor(Math.random() * 3); /* 0 a 2 */
+    const mockRole = ROLES[mockRoleIndex];
+    const mockUserNumber = (100 + Math.floor(Math.random() * 900)).toString();  /* 100 a 999 */
+    const mockUser = mockRole + mockUserNumber;
+    
+    const user = {
+      "courses": [],
+      "_id": "",
+      "role": mockRole,
+      "name": mockUser,
+      "avatar": "",
+      "username": mockUser,
+      "password": "password",
+      "email": mockUser + "@gmail.com", 
+    }
+    return user
   }
 
 }

@@ -45,7 +45,7 @@ export class UserService {
   /** TODO: Create user on the server */
   createUser(user: User): Observable<any> {
     // TODO: remove fake update
-    const id = Math.random().toString();
+    const id = Math.random().toString().slice(2);
     user._id = id;
     USERS.push(user);
     console.warn(USERS);
@@ -61,6 +61,5 @@ export class UserService {
     )
     USERS.splice(index, 1);
   }
-
 
 }

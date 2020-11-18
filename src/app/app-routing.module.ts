@@ -8,6 +8,7 @@ const routes: Routes = [
   // { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'users', component: UsersComponent },
   { path: 'users/form', component: UserFormComponent },
+  { path: 'users/random', component: UserFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
   { path: 'users/edit/:id', component: UserFormComponent },
 ]
 

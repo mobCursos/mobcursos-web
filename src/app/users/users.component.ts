@@ -3,6 +3,7 @@ import { User } from '../interfaces/user';
 import { ROLES } from '../mocks/user-roles';
 import { UserService } from "../user.service";
 
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -28,5 +29,4 @@ export class UsersComponent implements OnInit {
   removeUser(id: string) {
     this.userService.deleteUser(id);
   }
-
 }
