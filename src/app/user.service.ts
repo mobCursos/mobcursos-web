@@ -45,7 +45,8 @@ export class UserService {
   /** TODO: Create user on the server */
   createUser(user: User): Observable<any> {
     // TODO: remove fake update
-    const id = Math.random().toString().slice(2);
+    const pre_id = Math.random().toString().slice(2);
+    const id = (pre_id + pre_id).slice(0,23)
     user._id = id;
     USERS.push(user);
     console.warn(USERS);
