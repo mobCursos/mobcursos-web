@@ -1,66 +1,92 @@
 import { Injectable } from '@angular/core';
-import { waitForAsync } from '@angular/core/testing';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
+import { catchError, map, tap, retry } from 'rxjs/operators';
 import { User } from "./interfaces/user";
 import { USERS } from "./mocks/users";
 import { UsersComponent } from './users/users.component';
+import { environment } from 'src/environments/environment';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    // Authorization: '...'
+  })
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient) { }
 
-  /** SEE: https://angular.io/tutorial/toh-pt6 */
+  private usersUrl = environment.apiUrl + "users/";
 
-  /** TODO: Get users from the server */
   getUsers(): Observable<User[]> {
-    return of(USERS);
+    return this.http.get<User[]>(this.usersUrl);
+    /** TODO: implement log and handleError */
+      // .pipe(
+      //   catchError(this.handleError<User[]>('getUsers', []))
+      // )    
   }
 
-  /** TODO: Get user from the server */
   getUser(id: string): Observable<User> {
-    return of(USERS.find(user => user._id === id));
+    /** TODO: implement log and handleError */
+    const url =  `${this.usersUrl}${id}`;
+    return this.http.get<User>(url);
   }
 
-  /** TODO: Update user on the server */
-  updateUser(user: User): Observable<any> {
-    // TODO: remove fake update
-    const id = user._id; 
-    const index = USERS.findIndex(
-      (users) => {
-        return users._id == id; 
-      }
-    )
-    console.warn('SERVICE UPDATE id: ', id)
-    console.warn('SERVICE UPDATE index: ', index)
-    USERS.splice(index, 1);
-    USERS.push(user);
-    console.warn(USERS);
-
-    return of(USERS);
+  updateUser(user: User): Observable<User> {
+    /** TODO: implement log and handleError */
+    // httpOptions.headers =
+    //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
+    const id = user._id;
+    const url =  `${this.usersUrl}${id}`;
+    return this.http.put<User>(url, user);
   }
 
-  /** TODO: Create user on the server */
-  createUser(user: User): Observable<any> {
-    // TODO: remove fake update
-    const pre_id = Math.random().toString().slice(2);
-    const id = (pre_id + pre_id).slice(0,23)
-    user._id = id;
-    USERS.push(user);
-    console.warn(USERS);
-    return of(USERS);
+  createUser(user: User): Observable<User> {
+    /** TODO: implement log and handleError */
+
+    // api login route - register function
+    const url =  environment.apiUrl + 'register/'
+    return this.http.post<User>(url, user);
+
+    // api user route - add function (do not verify duplicated usernames, etc)
+    // return this.http.post<User>(this.usersUrl, user);
   }
 
-  /** TODO: Delete user on the server*/
-  deleteUser(id: string) {
-    const index = USERS.findIndex(
-      (users) => {
-        return users._id == id; 
-      }
-    )
-    USERS.splice(index, 1);
+  deleteUser(id: string): Observable<{}> {
+    /** TODO: implement log and handleError */
+    /** TODO: confirm deletion */
+    /** TODO: logic deletion */
+    const url = `${this.usersUrl}${id}`;
+    console.warn('DELETE url: ', url);
+    return this.http.delete(url);
   }
+
+  /**
+   * base on: https://angular.io/tutorial/toh-pt6#error-handling
+  * Handle Http operation that failed.
+  * Let the app continue.
+  * @param operation - name of the operation that failed
+  * @param result - optional value to return as the observable result
+  */
+  // private handleError<T>(operation = 'operation', result?: T) {
+  //  return (error: any): Observable<T> => {
+    
+  //    // TODO: send the error to remote logging infrastructure
+  //    console.error(error); // log to console instead
+    
+  //    // TODO: better job of transforming error for user consumption
+  //    this.log(`${operation} failed: ${error.message}`);
+    
+  //    // Let the app keep running by returning an empty result.
+  //    return of(result as T);
+  //  };
+  // }
+
 
 }
