@@ -25,10 +25,11 @@ export class UserFormComponent implements OnInit {
   roles = ROLES;
 
   userForm = this.fb.group({
-    _id: [''],
+    _id: [null],
     role: ['', Validators.required],
     name: ['', Validators.required],
     username: ['', Validators.required],
+    password: ['', Validators.required],
     email: ['', [Validators.email, Validators.required] ],
   });
 
@@ -45,22 +46,22 @@ export class UserFormComponent implements OnInit {
       this.userForm.patchValue(this.getMockUser());
     }
     else if(this.id){
-      this.getUser();
-      this.userForm.patchValue(this.user);
+      this.getUserInForm();     
     }
     
     // this.userForm.get('_id').disable(); /** TODO: automatic id from server */
   }
 
-  getUser(): void {
+  getUserInForm(): void {
     const id:string = this.id;
+    // console.warn('GET USER id: ', this.id)
     this.userService.getUser(id)
-      .subscribe(user => this.user = user);
-    console.warn('GET USER: ', this.user)
+      .subscribe(user => this.userForm.patchValue(user));
+    ;
   }
 
   onSubmit() {
-    console.warn("_id: ", this.userForm.value._id);
+    // console.warn("_id: ", this.userForm.value._id);
     if(this.userForm.value._id) {
       console.warn('UPDATE')
       this.userService.updateUser(this.userForm.value)
@@ -90,7 +91,7 @@ export class UserFormComponent implements OnInit {
     
     const user = {
       "courses": [],
-      "_id": "",
+      "_id": null,
       "role": mockRole,
       "name": mockUser,
       "avatar": "",

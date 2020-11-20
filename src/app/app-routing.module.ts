@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'users/form', component: UserFormComponent },
   { path: 'users/random', component: UserFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
   { path: 'users/edit/:id', component: UserFormComponent },
+  { path: 'users/remove/:id', component: UsersComponent },
 ]
 
 @NgModule({

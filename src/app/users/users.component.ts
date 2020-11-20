@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from "@angular/common";
 import { User } from '../interfaces/user';
 import { ROLES } from '../mocks/user-roles';
 import { UserService } from "../user.service";
@@ -14,11 +16,26 @@ export class UsersComponent implements OnInit {
   users: User[];
   roles = ROLES;
   roleFilter = "";
+  id: string = this.route.snapshot.paramMap.get('id');
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private location: Location
+    ) { }
 
   ngOnInit(): void {
     this.getUsers();
+    console.warn('URL: ', this.route.snapshot.routeConfig.path)
+    if (this.route.snapshot.routeConfig.path == "users/remove/:id") {
+      this.removeUser(this.id);
+    }
+
+  }
+
+  ngOnChanges(): void {
+    this.getUsers();
+    console.warn('changes')
   }
 
   getUsers(): void {
@@ -26,7 +43,13 @@ export class UsersComponent implements OnInit {
       .subscribe(users => this.users = users);
   }
 
-  removeUser(id: string) {
-    this.userService.deleteUser(id);
+  removeUser(id: string): void {
+    this.userService.deleteUser(id)
+      .subscribe(() => this.goBack());
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }
