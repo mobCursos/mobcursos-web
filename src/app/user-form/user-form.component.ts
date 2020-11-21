@@ -61,13 +61,10 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.warn("_id: ", this.userForm.value._id);
     if(this.userForm.value._id) {
-      console.warn('UPDATE')
       this.userService.updateUser(this.userForm.value)
       .subscribe(() => this.goBack())
     } else {
-      console.warn('CREATE')
       this.userService.createUser(this.userForm.value)
       .subscribe(() => this.goBack())
     }

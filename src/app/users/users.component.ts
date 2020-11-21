@@ -26,7 +26,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    console.warn('URL: ', this.route.snapshot.routeConfig.path)
     if (this.route.snapshot.routeConfig.path == "users/remove/:id") {
       this.removeUser(this.id);
     }
@@ -35,7 +34,6 @@ export class UsersComponent implements OnInit {
 
   ngOnChanges(): void {
     this.getUsers();
-    console.warn('changes')
   }
 
   getUsers(): void {
