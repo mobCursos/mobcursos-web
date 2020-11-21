@@ -25,7 +25,7 @@ export class UserService {
     private messageService: MessageService
     ) { }
 
-  private usersUrl = environment.apiUrl + "users/";
+  private usersUrl = environment.apiUrl + "users";
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl)
@@ -36,7 +36,7 @@ export class UserService {
   }
 
   getUser(id: string): Observable<User> {
-    const url =  `${this.usersUrl}${id}`;
+    const url =  `${this.usersUrl}/${id}`;
     return this.http.get<User>(url)
       .pipe(
         tap(_ => this.log(`fetched user id=${id}`)),
@@ -48,7 +48,7 @@ export class UserService {
     // httpOptions.headers =
     //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
     const id = user._id;
-    const url =  `${this.usersUrl}${id}`;
+    const url =  `${this.usersUrl}/${id}`;
     return this.http.put<User>(url, user)
       .pipe(
         tap(_ => this.log(`updated user id=${id}`)),
@@ -73,7 +73,7 @@ export class UserService {
   deleteUser(id: string): Observable<{}> {
     /** TODO: confirm deletion */
     /** TODO: logic deletion */
-    const url = `${this.usersUrl}${id}`;
+    const url = `${this.usersUrl}/${id}`;
     return this.http.delete(url)
       .pipe(
         tap(_ => this.log(`deleted user id=${id}`)),
@@ -106,6 +106,5 @@ export class UserService {
      return of(result as T);
    };
   }
-
 
 }
