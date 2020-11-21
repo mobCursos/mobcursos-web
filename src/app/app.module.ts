@@ -8,13 +8,15 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserFilterPipe } from './user-filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     UserFormComponent,
-    UserFilterPipe
+    UserFilterPipe,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

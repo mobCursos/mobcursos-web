@@ -6,6 +6,7 @@ import { User } from "./interfaces/user";
 import { USERS } from "./mocks/users";
 import { UsersComponent } from './users/users.component';
 import { environment } from 'src/environments/environment';
+import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,11 +21,14 @@ const httpOptions = {
 export class UserService {
 
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private messageService: MessageService
+    ) { }
 
   private usersUrl = environment.apiUrl + "users/";
 
   getUsers(): Observable<User[]> {
+    this.messageService.add('UserService: fetched users');
     return this.http.get<User[]>(this.usersUrl);
     /** TODO: implement log and handleError */
       // .pipe(
