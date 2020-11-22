@@ -44,6 +44,15 @@ export class UserService {
       );
   }
 
+  searchUsers(text: string): Observable<User[]> {
+    const url = `${this.usersUrl}/search?role=${text}`;
+    return this.http.get<User[]>(url)
+      .pipe(
+        tap(_ => this.log('found users')),
+        catchError(this.handleError<User[]>('searchUsers', []))
+      )
+  }
+
   updateUser(user: User): Observable<User> {
     // httpOptions.headers =
     //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
