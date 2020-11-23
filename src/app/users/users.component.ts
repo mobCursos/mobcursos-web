@@ -17,14 +17,12 @@ export class UsersComponent implements OnInit {
   roles = ROLES;
   roleFilter = "";
   id: string = this.route.snapshot.paramMap.get('id');
-  foundUsers: User[];
-  text: string = "";
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -50,11 +48,6 @@ export class UsersComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
-  }
-
-  find(text: string) {
-    this.userService.searchUsers(text)
-      .subscribe(users => this.foundUsers = users);
   }
 
 }

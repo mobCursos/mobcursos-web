@@ -36,12 +36,4 @@
   </table>
 </div>
 
-<div>
-  <input type="text" placeholder="Buscar usuário" [(ngModel)]="text">
-  <button (click)="find(text)">Buscar</button>
-    <ul *ngIf="foundUsers">
-      <li *ngFor="let foundUser of foundUsers">
-        {{foundUser.role}} - {{foundUser.name}} - {{foundUser.name}}
-      </li>
-    </ul>
-</div>
+<app-user-search></app-user-search>

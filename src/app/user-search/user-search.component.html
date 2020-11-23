@@ -1,0 +1,10 @@
+<div>
+  <input type="text" id="search-box" #searchBox placeholder="Buscar usuário"
+      (input)="search(searchBox.value)">
+  <button (click)="search(searchBox.value)">Buscar</button>
+    <ul class="search-result">
+      <li *ngFor="let user of users$ | async">
+        {{user.role}} - {{user.name}} - {{user.name}}
+      </li>
+    </ul>
+</div>

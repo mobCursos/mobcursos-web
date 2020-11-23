@@ -9,6 +9,7 @@ import { UserFilterPipe } from './user-filter.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MessagesComponent } from './messages/messages.component';
     UsersComponent,
     UserFormComponent,
     UserFilterPipe,
-    MessagesComponent
+    MessagesComponent,
+    UserSearchComponent
   ],
   imports: [
     BrowserModule,
