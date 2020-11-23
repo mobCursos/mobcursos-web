@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getUsers();
