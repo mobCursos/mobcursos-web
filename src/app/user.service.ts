@@ -48,7 +48,7 @@ export class UserService {
     if(!term.trim()){
       return of([])
     }
-    const url = `${this.usersUrl}/search?role=${term}`;
+    const url = `${this.usersUrl}/search?role=${term}&name=${term}&username=${term}&email=${term}`;
     return this.http.get<User[]>(url)
       .pipe(
         tap(x => x.length ?
