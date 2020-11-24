@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { CoursesComponent } from './courses/courses.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'users/remove/:id', component: UsersComponent },
   // COURSES
   { path: 'courses', component: CoursesComponent },
-  // { path: 'courses/form', component: CourseFormComponent },
-  // { path: 'courses/random', component: CourseFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
-  // { path: 'courses/edit/:id', component: CourseFormComponent },
+  { path: 'courses/form', component: CourseFormComponent },
+  { path: 'courses/random', component: CourseFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
+  { path: 'courses/edit/:id', component: CourseFormComponent },
   { path: 'courses/remove/:id', component: CoursesComponent },
 ]
 

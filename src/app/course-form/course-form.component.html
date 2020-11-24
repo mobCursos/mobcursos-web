@@ -1,1 +1,25 @@
-<p>course-form works!</p>
+<h3>Cadastro</h3>
+
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <label for="_id">
+    ID:
+    <input type="text" formControlName="_id">
+  </label>
+  <br>
+  <label for="name">
+    Nome:
+    <input type="text" formControlName="name" required minlength="3" maxlength="20">
+  </label>
+  <br>
+  <label for="description">
+    Coursename:
+    <input type="text" formControlName="description" required minlength="3" maxlength="20">
+  </label>
+  
+  <br>
+  <input type="submit" [disabled]="!courseForm.valid" value="Salvar">
+  
+</form>
+
+<button (click)="onReset()">{{resetButtonText}}</button>
+<button (click)="goBack()">{{backButtonText}}</button>
