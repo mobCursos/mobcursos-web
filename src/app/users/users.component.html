@@ -30,8 +30,10 @@
       <td>{{user.name}}</td>
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
-      <button routerLink="edit/{{user._id}}">Editar</button>
-      <button routerLink="remove/{{user._id}}">Deletar</button>
+      <td>
+        <button routerLink="edit/{{user._id}}">Editar</button>
+        <button routerLink="remove/{{user._id}}">Deletar</button>
+      </td>
     </tr>
   </table>
 </div>

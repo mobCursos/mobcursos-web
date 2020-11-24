@@ -1,7 +1,7 @@
 import { User } from './user';
 
 export interface Course {
-  _id: string,
+  _id?: string,
   name: string,
   description: string,
   teacher?: User,

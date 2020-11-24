@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { UserSearchComponent } from './user-search/user-search.component';
     UserFormComponent,
     UserFilterPipe,
     MessagesComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    CoursesComponent,
+    CourseFormComponent
   ],
   imports: [
     BrowserModule,
