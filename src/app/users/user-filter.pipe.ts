@@ -2,8 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { User } from './interfaces/user';
 
 @Pipe({
-  name: 'userFilter',
-  pure: false
+  name: 'userFilter'
 })
 export class UserFilterPipe implements PipeTransform {
 

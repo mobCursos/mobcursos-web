@@ -6,19 +6,21 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserFilterPipe } from './user-filter.pipe';
 
 
 @NgModule({
   declarations: [
     UserListComponent,
     UserFormComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    UserFilterPipe
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    UsersRoutingModule,
   ]
 })
 export class UsersModule { }

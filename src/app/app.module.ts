@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CoursesModule } from './courses/courses.module';
     MessagesComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
