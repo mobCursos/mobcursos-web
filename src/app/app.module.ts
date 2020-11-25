@@ -18,10 +18,10 @@ import { CoursesModule } from './courses/courses.module';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     HttpClientModule,
     UsersModule,
-    CoursesModule
+    CoursesModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
