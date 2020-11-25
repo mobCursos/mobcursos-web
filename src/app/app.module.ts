@@ -9,6 +9,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { CommonModule } from '@angular/common';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CommonModule } from '@angular/common';
     UsersModule,
     CoursesModule,
     AppRoutingModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
