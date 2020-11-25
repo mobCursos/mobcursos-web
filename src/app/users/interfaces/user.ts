@@ -1,4 +1,4 @@
-import { Course } from './course';
+import { Course } from '../../courses/interfaces/course';
 
 export interface User {
   _id?: string,

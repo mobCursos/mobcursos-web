@@ -3,10 +3,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap, retry } from 'rxjs/operators';
 import { User } from "./interfaces/user";
-import { USERS } from "./mocks/users";
-import { UsersComponent } from './users/users.component';
 import { environment } from 'src/environments/environment';
-import { MessageService } from './message.service';
+import { MessageService } from '../message.service';
 
 @Injectable({
   providedIn: 'root'

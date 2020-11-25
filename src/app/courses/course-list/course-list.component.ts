@@ -7,10 +7,10 @@ import { CourseService } from "../course.service";
 
 @Component({
   selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css']
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.css']
 })
-export class CoursesComponent implements OnInit {
+export class CourseListComponent implements OnInit {
 
   courses: Course[];
   id: string = this.route.snapshot.paramMap.get('id');

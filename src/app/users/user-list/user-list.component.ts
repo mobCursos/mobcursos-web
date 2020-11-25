@@ -7,11 +7,11 @@ import { UserService } from "../user.service";
 
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   users: User[];
   roles = ROLES;
