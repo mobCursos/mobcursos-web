@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from "@angular/common";
 import { User } from '../interfaces/user';
 import { ROLES } from '../mocks/user-roles';
 import { UserService } from "../user.service";
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -13,22 +15,35 @@ import { UserService } from "../user.service";
 })
 export class UserListComponent implements OnInit {
 
-  users: User[];
+  users$: Observable<User[]>;
+  selectedId: string;
   roles = ROLES;
   roleFilter = "";
-  id: string = this.route.snapshot.paramMap.get('id');
+  // id: string = this.route.snapshot.paramMap.get('id');
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.getUsers();
-    if (this.route.snapshot.routeConfig.path == "users/remove/:id") {
-      this.removeUser(this.id);
-    }
+    // this.getUsers();
+    // if (this.route.snapshot.routeConfig.path == "users/remove/:id") {
+    //   this.removeUser(this.id);
+    // }
+    this.users$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        this.selectedId = params.get('id');
+        if(this.selectedId) {
+          this.deleteUser(this.selectedId);
+        }
+        return this.userService.getUsers();
+      })
+        
+    )
+    
 
   }
 
@@ -37,17 +52,15 @@ export class UserListComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
+    // this.userService.getUsers()
+      // .subscribe(users => this.users = users);
+      // .subscribe();
   }
 
-  removeUser(id: string): void {
+  deleteUser(id: string): void {
     this.userService.deleteUser(id)
-      .subscribe(() => this.goBack());
-  }
-
-  goBack(): void {
-    this.location.back();
+    // TODO: not reload component, but reuse
+      .subscribe(() => this.router.navigate(['/users']));
   }
 
 }
