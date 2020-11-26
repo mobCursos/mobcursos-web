@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MessageService } from '../../message.service';
 import { AuthService} from '../auth.service';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    public router: Router
+    private route: ActivatedRoute,
+    public authService: AuthService,
+    public router: Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +45,14 @@ export class LoginComponent implements OnInit {
     // Redirect the user
     this.router.navigate([redirectUrl]);
 
+  }
+
+  logout(): void {
+    this.authService.logout()
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

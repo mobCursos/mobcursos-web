@@ -1,10 +1,20 @@
-<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label for="username">Usuário</label>
-  <input type="text" formControlName="username" required minlength="3" maxlength="15">
-  <br>
-  <label for="password">Senha</label>
-  <input type="password" formControlName="password" required minlength="3" maxlength="150">
-  <br>
-  <input type="submit" [disabled]="!loginForm.valid" value="Entrar">
-</form>
+<div *ngIf="!this.authService.isLoggedIn">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label for="username">Usuário</label>
+    <input type="text" formControlName="username" required minlength="3" maxlength="15">
+    <br>
+    <label for="password">Senha</label>
+    <input type="password" formControlName="password" required minlength="3" maxlength="150">
+    <br>
+    <input type="submit" [disabled]="!loginForm.valid" value="Entrar">
+  </form>
+</div>
+
+<div *ngIf="this.authService.isLoggedIn">
+  <h2>Logout</h2>
+  <p>Confirma encerrar a sessão?</p>
+  <button (click)="logout()">Sim</button>
+</div>
+
+<button (click)="goBack()">Cancelar</button>

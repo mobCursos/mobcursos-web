@@ -9,6 +9,6 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'mobcursos-web';
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
   
 }
