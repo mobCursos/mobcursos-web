@@ -6,8 +6,8 @@
           </a>
           <ul class="main-nav js--main-nav">
               <li><a routerLink="/">Home</a></li>
-              <li><a routerLink="/login">Entrar</a></li>
-              <li><a routerLink="/logout">Sair</a></li>
+              <li *ngIf="!this.authService.isLoggedIn"><a routerLink="/login" routerLinkActive="active">Entrar</a></li>
+              <li *ngIf="this.authService.isLoggedIn"><a routerLink="/logout" routerLinkActive="active">Sair</a></li>
               <!-- TODO ADMIN AUTH -->
               <li><a routerLink="/users" routerLinkActive="active">Usuários</a></li>
               <li><a routerLink="/courses">Cursos</a></li>
