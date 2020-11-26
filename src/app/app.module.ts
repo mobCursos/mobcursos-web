@@ -25,8 +25,8 @@ import { httpInterceptorProviders } from './http-interceptors';
     HttpClientModule,
     UsersModule,
     CoursesModule,
-    AppRoutingModule,
     AuthModule,
+    AppRoutingModule,
   ],
   providers: [
     httpInterceptorProviders

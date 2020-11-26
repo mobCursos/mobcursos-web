@@ -38,8 +38,9 @@ export class AuthService {
   login(credentials: any): Observable<any>{
     return this.http.post<any>(this.url, credentials, this.httpOptions)
     .pipe(
-      tap(//_ => this.log('logged in'),
-          res => this.setSession(res)),
+      tap(_ => this.log('logged in')),
+      tap(res => this.setSession(res)),
+      tap(_ => this.isLoggedIn = true),
       catchError(this.handleError<any>('login'))
     )
   }

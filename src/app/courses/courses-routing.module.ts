@@ -4,11 +4,19 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
 
 const routes: Routes = [
-  { path: 'courses', component: CourseListComponent },
-  { path: 'courses/form', component: CourseFormComponent },
-  { path: 'courses/random', component: CourseFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
-  { path: 'courses/edit/:id', component: CourseFormComponent },
-  { path: 'courses/remove/:id', component: CourseListComponent },
+  { path: 'courses',
+    children: [
+      { path: '',
+        children: [
+          { path: '', component: CourseListComponent },
+          { path: 'form', component: CourseFormComponent },
+          { path: 'random', component: CourseFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
+          { path: 'edit/:id', component: CourseFormComponent },
+          { path: 'remove/:id', component: CourseListComponent }        
+        ]
+      }
+    ]
+  }
 ];
 
 @NgModule({

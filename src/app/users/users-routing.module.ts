@@ -8,16 +8,17 @@ const routes: Routes = [
   { path: 'users',
     canActivate: [AuthGuard],
     children: [
-    { path: '',
-      children: [
-        { path: 'users/form', component: UserFormComponent },
-        { path: 'users/random', component: UserFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
-        { path: 'users/edit/:id', component: UserFormComponent },
-        { path: 'users/remove/:id', component: UserListComponent },
-      ]},
-  
-  ]}
-  
+      { path: '',
+        children: [
+          { path: '', component: UserListComponent },
+          { path: 'form', component: UserFormComponent },
+          { path: 'random', component: UserFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
+          { path: 'edit/:id', component: UserFormComponent },
+          { path: 'remove/:id', component: UserListComponent },
+        ]
+      },
+    ]
+  } 
 ];
 
 @NgModule({
