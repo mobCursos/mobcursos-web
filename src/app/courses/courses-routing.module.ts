@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
 
 const routes: Routes = [
   { path: 'courses',
+    canActivate: [AuthGuard],
     children: [
       { path: '',
         children: [
