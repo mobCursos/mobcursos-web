@@ -42,7 +42,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     /** ONLY FOR DEVELOPMENT/TESTS */
     // console.warn("Rota: ",this.route.snapshot.routeConfig.path);
-    if (this.route.snapshot.routeConfig.path == "users/random") {
+    if (this.route.snapshot.routeConfig.path == "random") {
       this.userForm.patchValue(this.getMockUser());
     }
     else if(this.id){

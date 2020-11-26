@@ -40,7 +40,7 @@ export class CourseFormComponent implements OnInit {
   ngOnInit(): void {
     /** ONLY FOR DEVELOPMENT/TESTS */
     // console.warn("Rota: ",this.route.snapshot.routeConfig.path);
-    if (this.route.snapshot.routeConfig.path == "courses/random") {
+    if (this.route.snapshot.routeConfig.path == "random") {
       this.courseForm.patchValue(this.getMockCourse());
     }
     else if(this.id){

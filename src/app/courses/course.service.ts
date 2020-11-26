@@ -70,16 +70,11 @@ export class CourseService {
 
   createCourse(course: Course): Observable<Course> {
 
-    // api login route - register function
-    const url =  environment.apiUrl + 'register/'
-    return this.http.post<Course>(url, course, this.httpOptions)
+    return this.http.post<Course>(this.coursesUrl, course, this.httpOptions)
       .pipe(
         tap((newCourse: Course) => this.log(`added course id=${newCourse._id}`)),
         catchError(this.handleError<Course>(`createCourse`))
       );
-
-    // TODO: api course route - add function (do not verify duplicated coursenames, etc)
-    // return this.http.post<Course>(this.coursesUrl, course);
   }
 
   deleteCourse(id: string): Observable<{}> {

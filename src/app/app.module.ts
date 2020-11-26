@@ -9,6 +9,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { CommonModule } from '@angular/common';
+import { AuthModule } from './auth/auth.module';
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,12 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     UsersModule,
     CoursesModule,
+    AuthModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
