@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
     // store the attempted URL for redirecting
     this.authService.redirectUrl = url;
 
-    // redirect to the login page
+    // Redirect to the login page with extras
     return this.router.parseUrl('/login');
   }
   
