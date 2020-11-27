@@ -3,8 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
+import { CourseNoauthListComponent } from './course-noauth-list/course-noauth-list.component';
 
 const routes: Routes = [
+  { path: 'courses-noauth', component: CourseNoauthListComponent},
   { path: 'courses',
     canActivate: [AuthGuard],
     children: [
