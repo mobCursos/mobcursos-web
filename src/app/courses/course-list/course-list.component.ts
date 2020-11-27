@@ -23,7 +23,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCourses();
-    if (this.route.snapshot.routeConfig.path == "courses/remove/:id") {
+    if (this.route.snapshot.routeConfig.path == "remove/:id") {
       this.removeCourse(this.id);
     }
 
