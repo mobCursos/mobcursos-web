@@ -14,6 +14,8 @@ export class AuthService {
   // redirect after logggin in
   redirectUrl: string = '/';
 
+  userRole: string;
+
   private url = environment.apiUrl + 'login';
 
   httpOptions = {
@@ -27,7 +29,7 @@ export class AuthService {
     localStorage.setItem('token', authResult.token);
     // expiration time
     localStorage.setItem('expiresIn', authResult.expiresIn)
-    localStorage.setItem('role', authResult.role)
+    this.userRole =  authResult.role;
   }
 
   constructor(
@@ -49,7 +51,7 @@ export class AuthService {
     this.isLoggedIn = false;
     localStorage.removeItem('token');
     localStorage.removeItem('expiresIn');
-    localStorage.removeItem('role');
+    this.userRole = '';
   }
 
   // TODO: calculate when login expires
