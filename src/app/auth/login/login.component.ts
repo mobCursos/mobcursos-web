@@ -37,13 +37,9 @@ export class LoginComponent implements OnInit {
       password: password
     };
 
-    this.authService.login(credentials)
-      .subscribe(resp => console.warn(resp));
-
-    const redirectUrl = '/';
-
-    // Redirect the user
-    this.router.navigate([redirectUrl]);
+    this.authService.login(credentials).subscribe(
+      () => this.router.navigate([this.authService.redirectUrl])
+    );
 
   }
 

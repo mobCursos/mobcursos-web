@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, delay, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from '../message.service';
 
@@ -12,7 +12,7 @@ export class AuthService {
   isLoggedIn = false;
 
   // redirect after logggin in
-  redirectUrl: string;
+  redirectUrl: string = '/';
 
   private url = environment.apiUrl + 'login';
 
