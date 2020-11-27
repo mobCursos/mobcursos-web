@@ -10,7 +10,8 @@
               <li *ngIf="this.authService.isLoggedIn"><a routerLink="/logout" routerLinkActive="active">Sair</a></li>
               <!-- TODO ADMIN AUTH -->
               <li><a routerLink="/users" routerLinkActive="active">Usuários</a></li>
-              <li><a routerLink="/courses">Cursos</a></li>
+              <li *ngIf="this.authService.isLoggedIn"><a routerLink="/courses" routerLinkActive="active">Cursos</a></li>
+              <li *ngIf="!this.authService.isLoggedIn"><a routerLink="/courses-noauth" routerLinkActive="active">Cursos</a></li>
           </ul>
       </div>
       <!-- <img src="resources/img/logo-blue0.png" alt="logo mobCursos" class="logo"> -->

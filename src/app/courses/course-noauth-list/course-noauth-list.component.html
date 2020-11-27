@@ -1,0 +1,21 @@
+<h2>Cursos</h2>
+
+<div>
+  <button routerLink="search/">Procurar</button>
+</div>
+<div *ngIf="courses">
+  <table>
+    <tr>
+      <td>Nome</td>
+      <td>Descrição</td>
+      <td>Ações</td>
+    </tr>
+    <tr *ngFor="let course of courses">
+      <td>{{course.name}}</td>
+      <td>{{course.description}}</td>
+      <td>
+        <button routerLink="subscribe/{{course._id}}">Inscrever</button>
+      </td>
+    </tr>
+  </table>
+</div>
