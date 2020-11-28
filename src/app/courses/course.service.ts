@@ -33,6 +33,15 @@ export class CourseService {
       )    
   }
 
+  getCoursesOwn(): Observable<Course[]> {
+    const url = this.coursesUrl + '/own'
+    return this.http.get<Course[]>(url)
+      .pipe(
+        tap(_ => this.log('fetched courses of the user')),
+        catchError(this.handleError<Course[]>('getCoursesOwn', []))
+      )    
+  }
+
   getCoursesNoauth(): Observable<Course[]> {
     const url = this.coursesUrl + '-noauth'
     return this.http.get<Course[]>(url)

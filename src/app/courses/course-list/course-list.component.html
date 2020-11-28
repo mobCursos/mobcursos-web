@@ -1,25 +1,51 @@
-<h2>Cursos</h2>
-
-<div>
-  <button routerLink="form/">Novo</button>
-  <button routerLink="random/">(+ aleatorio)</button>
+<div *ngIf="userRole=='admin'">
+  <h2 >Cursos</h2>
+  <div>
+    <button routerLink="form/">Novo</button>
+    <button routerLink="random/">(+ aleatorio)</button>
+  </div>
+  <div *ngIf="courses">
+    <table>
+      <tr>
+        <td>ID</td>
+        <td>Nome</td>
+        <td>Descrição</td>
+        <td>Ações</td>
+      </tr>
+      <tr *ngFor="let course of courses">
+        <td>{{course._id}}</td>
+        <td>{{course.name}}</td>
+        <td>{{course.description}}</td>
+        <td>
+          <button routerLink="edit/{{course._id}}">Editar</button>
+          <button routerLink="remove/{{course._id}}">Deletar</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
-<div *ngIf="courses">
-  <table>
-    <tr>
-      <td>ID</td>
-      <td>Nome</td>
-      <td>Descrição</td>
-      <td>Ações</td>
-    </tr>
-    <tr *ngFor="let course of courses">
-      <td>{{course._id}}</td>
-      <td>{{course.name}}</td>
-      <td>{{course.description}}</td>
-      <td>
-        <button routerLink="edit/{{course._id}}">Editar</button>
-        <button routerLink="remove/{{course._id}}">Deletar</button>
-      </td>
-    </tr>
-  </table>
+
+<div *ngIf="userRole=='student'">
+  <h2>Meus Cursos</h2>
+  <div>
+    <button routerLink="search/">Pesquisar</button>
+  </div>
+  <div *ngIf="courses">
+    <table>
+      <tr>
+        <td>Nome</td>
+        <td>Descrição</td>
+        <td>Instrutor(a)</td>
+        <td>Ações</td>
+      </tr>
+      <tr *ngFor="let course of courses">
+        <td>{{course.name}}</td>
+        <td>{{course.description}}</td>
+        <td>{{course.teacher.name}}</td>
+        <td>
+          <button routerLink="unsubscribe/{{course._id}}">Cancelar inscrição</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
 import { Course } from '../interfaces/course';
 import { CourseService } from "../course.service";
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -14,11 +15,13 @@ export class CourseListComponent implements OnInit {
 
   courses: Course[];
   id: string = this.route.snapshot.paramMap.get('id');
+  userRole: string = this.authService.userRole;
 
   constructor(
     private courseService: CourseService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +37,17 @@ export class CourseListComponent implements OnInit {
   }
 
   getCourses(): void {
-    this.courseService.getCourses()
+    if (!this.userRole || this.userRole == 'admin') {
+      this.courseService.getCourses()
       .subscribe(courses => this.courses = courses);
+    } else {
+      console.warn('GET COURSES OWN:')
+      this.courseService.getCoursesOwn()
+      .subscribe(courses => {
+        this.courses = courses;
+        console.warn(courses)});
+    }
+    
   }
 
   removeCourse(id: string): void {
