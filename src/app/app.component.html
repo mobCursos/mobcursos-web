@@ -9,7 +9,7 @@
               <li *ngIf="!this.authService.isLoggedIn"><a routerLink="/login" routerLinkActive="active">Entrar</a></li>
               <li *ngIf="this.authService.isLoggedIn"><a routerLink="/logout" routerLinkActive="active">Sair</a></li>
               <!-- TODO ADMIN AUTH -->
-              <li><a routerLink="/users" routerLinkActive="active">Usuários</a></li>
+              <li *ngIf="this.authService.isLoggedIn && this.authService.userRole == 'admin'"><a routerLink="/users" routerLinkActive="active">Usuários</a></li>
               <li *ngIf="this.authService.isLoggedIn"><a routerLink="/courses" routerLinkActive="active">Cursos</a></li>
               <li *ngIf="!this.authService.isLoggedIn"><a routerLink="/courses-noauth" routerLinkActive="active">Cursos</a></li>
           </ul>

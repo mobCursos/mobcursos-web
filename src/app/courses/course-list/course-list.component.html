@@ -8,7 +8,7 @@
     <table>
       <tr>
         <td>ID</td>
-        <td>Nome</td>
+        <td>Curso</td>
         <td>Descrição</td>
         <td>Ações</td>
       </tr>
@@ -33,7 +33,7 @@
   <div *ngIf="courses">
     <table>
       <tr>
-        <td>Nome</td>
+        <td>Curso</td>
         <td>Descrição</td>
         <td>Instrutor(a)</td>
         <td>Ações</td>
@@ -44,6 +44,35 @@
         <td>{{course.teacher.name}}</td>
         <td>
           <button routerLink="unsubscribe/{{course._id}}">Cancelar inscrição</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="userRole=='teacher'">
+  <h2>Meus Cursos</h2>
+  <div>
+    <button routerLink="form/">Novo</button>
+    <button routerLink="random/">(+ aleatorio)</button>
+  </div>
+  <div *ngIf="courses">
+    <table>
+      <tr>
+        <td>Curso</td>
+        <td>Descrição</td>
+        <td>Alunos</td>
+        <td>Ações</td>
+      </tr>
+      <tr *ngFor="let course of courses">
+        <td>{{course.name}}</td>
+        <td>{{course.description}}</td>
+        <td>
+          <ul *ngFor="let student of course.students">
+            {{student.name}}
+          </ul>
+        <td>
+          <button routerLink="edit/{{course._id}}">Editar info</button>
         </td>
       </tr>
     </table>
