@@ -27,9 +27,6 @@
 
 <div *ngIf="userRole=='student'">
   <h2>Meus Cursos</h2>
-  <div>
-    <button routerLink="search/">Pesquisar</button>
-  </div>
   <div *ngIf="courses">
     <table>
       <tr>
@@ -43,7 +40,7 @@
         <td>{{course.description}}</td>
         <td>{{course.teacher.name}}</td>
         <td>
-          <button routerLink="unsubscribe/{{course._id}}">Cancelar inscrição</button>
+          <button (click)="unsubscribe(course._id)">Cancelar inscrição</button>
         </td>
       </tr>
     </table>

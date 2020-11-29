@@ -106,6 +106,18 @@ export class CourseService {
       );
   }
 
+  unsubscribeFormCourse(id: string): Observable<{}> {
+    const url = `${this.coursesUrl}/unsubscribe`;
+    const course = {
+      courseId: id
+    }
+    return this.http.post(url, course)
+      .pipe(
+        tap(_ => this.log(`unsubscribed course id=${id}`)),
+        catchError(this.handleError(`unsubscribeFromCourse id=${id}`))
+      );
+  }
+
   /** Log a message with the service */
   private log(message: string): void {
     this.messageService.add(`[CourseService] ${message}`);

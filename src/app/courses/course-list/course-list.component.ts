@@ -55,6 +55,11 @@ export class CourseListComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
+  unsubscribe(id: string): void {
+    this.courseService.unsubscribeFormCourse(id)
+      .subscribe();
+  }
+
   goBack(): void {
     this.location.back();
   }

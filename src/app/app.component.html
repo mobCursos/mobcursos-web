@@ -1,26 +1,40 @@
 <div class="container-hero-header">
   <nav class="item-nav">
-      <div class="flex-responsive-nav">
-          <a class="mobile-nav-icon js--mobile-nav-icon">
-              <!-- <ion-icon name="menu-sharp"></ion-icon> -->
-          </a>
-          <ul class="main-nav js--main-nav">
-              <li><a routerLink="/">Home</a></li>
-              <li *ngIf="!this.authService.isLoggedIn"><a routerLink="/login" routerLinkActive="active">Entrar</a></li>
-              <li *ngIf="this.authService.isLoggedIn"><a routerLink="/logout" routerLinkActive="active">Sair</a></li>
-              <!-- TODO ADMIN AUTH -->
-              <li *ngIf="this.authService.isLoggedIn && this.authService.userRole == 'admin'"><a routerLink="/users" routerLinkActive="active">Usuários</a></li>
-              <li *ngIf="this.authService.isLoggedIn"><a routerLink="/courses" routerLinkActive="active">Cursos</a></li>
-              <li *ngIf="!this.authService.isLoggedIn"><a routerLink="/courses-noauth" routerLinkActive="active">Cursos</a></li>
-          </ul>
-      </div>
-      <!-- <img src="resources/img/logo-blue0.png" alt="logo mobCursos" class="logo"> -->
+    <div class="flex-responsive-nav">
+      <a class="mobile-nav-icon js--mobile-nav-icon">
+        <!-- <ion-icon name="menu-sharp"></ion-icon> -->
+      </a>
+      <ul class="main-nav js--main-nav">
+        <!-- NO AUTH -->
+        <li><a routerLink="/">Home</a></li>
+        <li *ngIf="!this.authService.isLoggedIn">
+            <a routerLink="/login" routerLinkActive="active">Entrar</a>
+        </li>
+        <li *ngIf="this.authService.isLoggedIn">
+            <a routerLink="/logout" routerLinkActive="active">Sair</a>
+        </li>
+        <!-- ADMIN AUTH -->
+        <li *ngIf="this.authService.userRole == 'admin'">
+            <a routerLink="/users" routerLinkActive="active">Usuários</a>
+        </li>
+        <!-- NO AUTH -->
+        <li *ngIf="!this.authService.isLoggedIn">
+            <a routerLink="/courses-noauth" routerLinkActive="active">Cursos</a>
+        </li>
+        <!-- STUDENT AND TEACHER AUTH -->
+        <div *ngIf="this.authService.isLoggedIn && this.authService.userRole != 'admin'">
+            <li><a routerLink="/courses" routerLinkActive="active">Meus cursos</a></li>
+            <li><a routerLink="/courses-noauth" routerLinkActive="active">Cursos disponíveis</a></li>             
+        </div>
+      </ul>
+    </div>
+    <!-- <img src="resources/img/logo-blue0.png" alt="logo mobCursos" class="logo"> -->
   </nav>
   <div class="item-hero-text-box">
-      <h1>mobCursos</h1>
-      <p>Cursos online de TI</p>
-      <!-- <a class="btn btn-full" href="login.html">Entrar</a>
-      <a class="btn btn-empty" href="#">Criar conta</a> -->
+    <h1>mobCursos</h1>
+    <p>Cursos online de TI</p>
+    <!-- <a class="btn btn-full" href="login.html">Entrar</a>
+    <a class="btn btn-empty" href="#">Criar conta</a> -->
   </div>
 </div>
 
