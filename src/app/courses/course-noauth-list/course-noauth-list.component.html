@@ -13,8 +13,9 @@
     <tr *ngFor="let course of courses">
       <td>{{course.name}}</td>
       <td>{{course.description}}</td>
-      <td>
-        <button routerLink="subscribe/{{course._id}}">Inscrever</button>
+      <!-- TODO: create logic on TS to unauth users - Register or Login -->
+      <td *ngIf="userRole=='student'" >
+        <button routerLink="subscribe/">Inscrever-se</button>
       </td>
     </tr>
   </table>

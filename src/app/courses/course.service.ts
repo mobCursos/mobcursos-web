@@ -106,6 +106,18 @@ export class CourseService {
       );
   }
 
+  subscribeToCourse(id: string): Observable<{}> {
+    const url = `${this.coursesUrl}/subscribe`;
+    const course = {
+      courseId: id
+    }
+    return this.http.post(url, course)
+      .pipe(
+        tap(_ => this.log(`subscribed to course id=${id}`)),
+        catchError(this.handleError(`subscribeToCourse id=${id}`))
+      );
+  }
+
   unsubscribeFormCourse(id: string): Observable<{}> {
     const url = `${this.coursesUrl}/unsubscribe`;
     const course = {
