@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { Course } from '../interfaces/course';
 import { CourseService } from "../course.service";
 import { AuthService } from 'src/app/auth/auth.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class CourseListComponent implements OnInit {
 
-  courses: Course[];
+  courses$: Observable<Course[]>;
   id: string = this.route.snapshot.paramMap.get('id');
   userRole: string = this.authService.userRole;
   currentRoute: string;
@@ -40,29 +41,25 @@ export class CourseListComponent implements OnInit {
       this.isOwnCourses = true;
     }
     if (this.currentRoute == "remove/:id") {
-      this.removeCourse(this.id);
+      this.deleteCourse(this.id);
     }
-  }
-
-  ngOnChanges(): void {
-    this.getCourses();
   }
 
   getCourses(): void {
+    // TODO: use route.paramMap and change deleteCourse method
+    // TODO: reload component or reuse (reuse is preferable)
     if (!this.userRole || this.userRole == 'admin') {
-      this.courseService.getCourses(this.authService.isLoggedIn)
-      .subscribe(courses => this.courses = courses);
+      this.courses$ = this.courseService.getCourses(this.authService.isLoggedIn);
+    
       // only student and teacher
     } else if (this.route.snapshot.routeConfig.path == "available") {
-      this.courseService.getAvailableCourses()
-      .subscribe(courses => this.courses = courses);
+      this.courses$ = this.courseService.getAvailableCourses()
     } else {
-      this.courseService.getOwnCourses()
-      .subscribe(courses => this.courses = courses);
+      this.courses$ = this.courseService.getOwnCourses()
     }
   }
 
-  removeCourse(id: string): void {
+  deleteCourse(id: string): void {
     this.courseService.deleteCourse(id)
       .subscribe(() => this.goBack());
   }

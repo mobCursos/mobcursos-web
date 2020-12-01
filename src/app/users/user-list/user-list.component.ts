@@ -29,10 +29,10 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getUsers();
-    // if (this.route.snapshot.routeConfig.path == "users/remove/:id") {
-    //   this.removeUser(this.id);
-    // }
+    this.getUsers();
+  }
+
+  getUsers(): void {
     this.users$ = this.route.paramMap.pipe(
       switchMap(params => {
         this.selectedId = params.get('id');
@@ -41,20 +41,7 @@ export class UserListComponent implements OnInit {
         }
         return this.userService.getUsers();
       })
-        
     )
-    
-
-  }
-
-  ngOnChanges(): void {
-    this.getUsers();
-  }
-
-  getUsers(): void {
-    // this.userService.getUsers()
-      // .subscribe(users => this.users = users);
-      // .subscribe();
   }
 
   deleteUser(id: string): void {
