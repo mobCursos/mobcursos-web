@@ -25,29 +25,35 @@ export class CourseService {
 
   private coursesUrl = environment.apiUrl + "courses";
 
-  getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(this.coursesUrl)
+  getCourses(auth: boolean): Observable<Course[]> {
+    let url: string;
+    if (auth) {
+      url = this.coursesUrl;
+    } else {
+      url = this.coursesUrl + '-noauth'
+    }
+    return this.http.get<Course[]>(url)
       .pipe(
         tap(_ => this.log('fetched courses')),
         catchError(this.handleError<Course[]>('getCourses', []))
       )    
   }
 
-  getCoursesOwn(): Observable<Course[]> {
+  getOwnCourses(): Observable<Course[]> {
     const url = this.coursesUrl + '/own'
     return this.http.get<Course[]>(url)
       .pipe(
         tap(_ => this.log('fetched courses of the user')),
-        catchError(this.handleError<Course[]>('getCoursesOwn', []))
+        catchError(this.handleError<Course[]>('getOwnCourses', []))
       )    
   }
 
-  getCoursesNoauth(): Observable<Course[]> {
-    const url = this.coursesUrl + '-noauth'
+  getAvailableCourses(): Observable<Course[]> {
+    const url = this.coursesUrl + '/available'
     return this.http.get<Course[]>(url)
       .pipe(
-        tap(_ => this.log('fetched courses no auth')),
-        catchError(this.handleError<Course[]>('getCoursesNoAuth', []))
+        tap(_ => this.log('fetched available courses for the user')),
+        catchError(this.handleError<Course[]>('getAvailableCourses', []))
       )    
   }
 

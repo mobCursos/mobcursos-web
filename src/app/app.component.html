@@ -5,27 +5,36 @@
         <!-- <ion-icon name="menu-sharp"></ion-icon> -->
       </a>
       <ul class="main-nav js--main-nav">
-        <!-- NO AUTH -->
+        <!-- ALLWAYS -->
         <li><a routerLink="/">Home</a></li>
-        <li *ngIf="!this.authService.isLoggedIn">
-            <a routerLink="/login" routerLinkActive="active">Entrar</a>
-        </li>
-        <li *ngIf="this.authService.isLoggedIn">
-            <a routerLink="/logout" routerLinkActive="active">Sair</a>
-        </li>
-        <!-- ADMIN AUTH -->
-        <li *ngIf="this.authService.userRole == 'admin'">
-            <a routerLink="/users" routerLinkActive="active">Usuários</a>
-        </li>
+
         <!-- NO AUTH -->
         <li *ngIf="!this.authService.isLoggedIn">
-            <a routerLink="/courses-noauth" routerLinkActive="active">Cursos</a>
+          <a routerLink="/courses-noauth" routerLinkActive="active">Cursos</a>
         </li>
-        <!-- STUDENT AND TEACHER AUTH -->
+
+        <!-- ADMIN -->
+        <div *ngIf="this.authService.userRole == 'admin'">
+            <li><a routerLink="/users" routerLinkActive="active">Gerenciar Usuários</a></li>
+            <li><a routerLink="/courses" routerLinkActive="active">Gerenciar Cursos</a></li>
+        </div>
+
+        <!-- STUDENT / TEACHER -->
         <div *ngIf="this.authService.isLoggedIn && this.authService.userRole != 'admin'">
             <li><a routerLink="/courses" routerLinkActive="active">Meus cursos</a></li>
-            <li><a routerLink="/courses-noauth" routerLinkActive="active">Cursos disponíveis</a></li>             
+            <li><a routerLink="/courses/available" routerLinkActive="active">Cursos disponíveis</a></li>             
         </div>
+
+        <!-- LOGIN/LOGOUT -->
+        <div>
+          <li *ngIf="!this.authService.isLoggedIn">
+            <a routerLink="/login" routerLinkActive="active">Entrar</a>
+          </li>
+          <li *ngIf="this.authService.isLoggedIn">
+            <a routerLink="/logout" routerLinkActive="active">Sair</a>
+        </li>
+        </div>
+
       </ul>
     </div>
     <!-- <img src="resources/img/logo-blue0.png" alt="logo mobCursos" class="logo"> -->

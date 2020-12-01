@@ -16,6 +16,9 @@ export class CourseListComponent implements OnInit {
   courses: Course[];
   id: string = this.route.snapshot.paramMap.get('id');
   userRole: string = this.authService.userRole;
+  currentRoute: string;
+  isOwnCourses: boolean;
+  title: string;
 
   constructor(
     private courseService: CourseService,
@@ -26,10 +29,19 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCourses();
-    if (this.route.snapshot.routeConfig.path == "remove/:id") {
+    this.currentRoute = this.route.snapshot.routeConfig.path;
+    if (!this.authService.isLoggedIn ||
+         this.currentRoute == 'available' ||
+         this.userRole == 'admin') {
+      this.title = 'Cursos';
+      this.isOwnCourses = false;
+    } else {
+      this.title = 'Meus Cursos';
+      this.isOwnCourses = true;
+    }
+    if (this.currentRoute == "remove/:id") {
       this.removeCourse(this.id);
     }
-
   }
 
   ngOnChanges(): void {
@@ -38,21 +50,26 @@ export class CourseListComponent implements OnInit {
 
   getCourses(): void {
     if (!this.userRole || this.userRole == 'admin') {
-      this.courseService.getCourses()
+      this.courseService.getCourses(this.authService.isLoggedIn)
+      .subscribe(courses => this.courses = courses);
+      // only student and teacher
+    } else if (this.route.snapshot.routeConfig.path == "available") {
+      this.courseService.getAvailableCourses()
       .subscribe(courses => this.courses = courses);
     } else {
-      console.warn('GET COURSES OWN:')
-      this.courseService.getCoursesOwn()
-      .subscribe(courses => {
-        this.courses = courses;
-        console.warn(courses)});
+      this.courseService.getOwnCourses()
+      .subscribe(courses => this.courses = courses);
     }
-    
   }
 
   removeCourse(id: string): void {
     this.courseService.deleteCourse(id)
       .subscribe(() => this.goBack());
+  }
+
+  subscribe(id: string): void {
+    this.courseService.subscribeToCourse(id)
+      .subscribe();
   }
 
   unsubscribe(id: string): void {

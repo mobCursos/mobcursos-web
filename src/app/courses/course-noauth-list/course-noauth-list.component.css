@@ -1,8 +1,0 @@
-table, th, td {
-  border: 1pt solid blue;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 10px;
-}
