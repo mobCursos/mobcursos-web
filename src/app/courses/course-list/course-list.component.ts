@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from "@angular/common";
 import { Course } from '../interfaces/course';
 import { CourseService } from "../course.service";
@@ -25,7 +25,8 @@ export class CourseListComponent implements OnInit {
     private courseService: CourseService,
     private route: ActivatedRoute,
     private location: Location,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -46,8 +47,6 @@ export class CourseListComponent implements OnInit {
   }
 
   getCourses(): void {
-    // TODO: use route.paramMap and change deleteCourse method
-    // TODO: reload component or reuse (reuse is preferable)
     if (!this.userRole || this.userRole == 'admin') {
       this.courses$ = this.courseService.getCourses(this.authService.isLoggedIn);
     
@@ -61,17 +60,17 @@ export class CourseListComponent implements OnInit {
 
   deleteCourse(id: string): void {
     this.courseService.deleteCourse(id)
-      .subscribe(() => this.goBack());
+      .subscribe(() => this.getCourses());
   }
 
   subscribe(id: string): void {
     this.courseService.subscribeToCourse(id)
-      .subscribe();
+      .subscribe(() => this.getCourses());
   }
 
   unsubscribe(id: string): void {
     this.courseService.unsubscribeFormCourse(id)
-      .subscribe();
+      .subscribe(() => this.getCourses());
   }
 
   goBack(): void {

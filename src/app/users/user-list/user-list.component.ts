@@ -33,21 +33,12 @@ export class UserListComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.users$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        this.selectedId = params.get('id');
-        if(this.selectedId) {
-          this.deleteUser(this.selectedId);
-        }
-        return this.userService.getUsers();
-      })
-    )
+    this.users$ = this.userService.getUsers();
   }
 
   deleteUser(id: string): void {
     this.userService.deleteUser(id)
-    // TODO: not reload component, but reuse
-      .subscribe(() => this.router.navigate(['/users']));
+      .subscribe(() => this.getUsers());
   }
 
 }

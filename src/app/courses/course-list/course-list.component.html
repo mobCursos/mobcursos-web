@@ -78,6 +78,7 @@
               <button *ngIf="isOwnCourses"
                       routerLink="edit/{{course._id}}">Editar info
               </button>
+              <button (click)="deleteCourse(course._id)">Excluir</button>
             </td>
           </tr>
         </table>
