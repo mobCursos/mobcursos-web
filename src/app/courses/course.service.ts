@@ -25,20 +25,35 @@ export class CourseService {
 
   private coursesUrl = environment.apiUrl + "courses";
 
-  getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(this.coursesUrl)
+  getCourses(auth: boolean): Observable<Course[]> {
+    let url: string;
+    if (auth) {
+      url = this.coursesUrl;
+    } else {
+      url = this.coursesUrl + '-noauth'
+    }
+    return this.http.get<Course[]>(url)
       .pipe(
         tap(_ => this.log('fetched courses')),
         catchError(this.handleError<Course[]>('getCourses', []))
       )    
   }
 
-  getCoursesNoauth(): Observable<Course[]> {
-    const url = this.coursesUrl + '-noauth'
+  getOwnCourses(): Observable<Course[]> {
+    const url = this.coursesUrl + '/own'
     return this.http.get<Course[]>(url)
       .pipe(
-        tap(_ => this.log('fetched courses no auth')),
-        catchError(this.handleError<Course[]>('getCoursesNoAuth', []))
+        tap(_ => this.log('fetched courses of the user')),
+        catchError(this.handleError<Course[]>('getOwnCourses', []))
+      )    
+  }
+
+  getAvailableCourses(): Observable<Course[]> {
+    const url = this.coursesUrl + '/available'
+    return this.http.get<Course[]>(url)
+      .pipe(
+        tap(_ => this.log('fetched available courses for the user')),
+        catchError(this.handleError<Course[]>('getAvailableCourses', []))
       )    
   }
 
@@ -94,6 +109,30 @@ export class CourseService {
       .pipe(
         tap(_ => this.log(`deleted course id=${id}`)),
         catchError(this.handleError(`deleteCourse id=${id}`))
+      );
+  }
+
+  subscribeToCourse(id: string): Observable<{}> {
+    const url = `${this.coursesUrl}/subscribe`;
+    const course = {
+      courseId: id
+    }
+    return this.http.post(url, course)
+      .pipe(
+        tap(_ => this.log(`subscribed to course id=${id}`)),
+        catchError(this.handleError(`subscribeToCourse id=${id}`))
+      );
+  }
+
+  unsubscribeFormCourse(id: string): Observable<{}> {
+    const url = `${this.coursesUrl}/unsubscribe`;
+    const course = {
+      courseId: id
+    }
+    return this.http.post(url, course)
+      .pipe(
+        tap(_ => this.log(`unsubscribed course id=${id}`)),
+        catchError(this.handleError(`unsubscribeFromCourse id=${id}`))
       );
   }
 
