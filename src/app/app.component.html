@@ -32,10 +32,9 @@
           </li>
           <li *ngIf="this.authService.isLoggedIn">
             <a routerLink="/logout" routerLinkActive="active">Sair</a>
-            <br><span> (Sessão termina em: {{authService.expiresInSeconds}} segundos)</span>
-            <br><span> (Sessão termina em: {{authService.expiresInDatetime}} )</span>
+            <br><span> (Sessão termina em: {{authService.getRemainingSessionTime()/60-1 | number:'2.0-0'}}:{{authService.getRemainingSessionTime()%60 | number:'2.0-0'}})</span>
+            <br><span> (Datetime final: {{authService.getRemainingSessionTime()}} segundos)</span>
             <br><span> (Sessão válida: {{authService.isSessionValid()}} )</span>
-            <br><span> (Counter: {{authService.getRemainingSessionTime()}} )</span>
         </li>
         </div>
 

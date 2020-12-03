@@ -18,6 +18,8 @@ export class AuthService {
   expiresIn: string; // milisseconds
   expiresInSeconds: string;
   expiresInDatetime: Date;
+  min: number;
+  sec: number;
 
   sessionTimeDurationSeconds: number = 0;
 
@@ -44,6 +46,9 @@ export class AuthService {
     this.expiresIn = authResult.expiresIn;
     this.expiresInSeconds = (+this.expiresIn/1000).toString();
     this.expiresInDatetime = this.getExpiresInDatetime(this.expiresIn);
+    this.min = Math.round(this.getRemainingSessionTime()/60);
+    this.sec = Math.round(this.getRemainingSessionTime()%60);
+
   }
 
   private getExpiresInDatetime(expiresIn: string) {
@@ -68,9 +73,16 @@ export class AuthService {
     )
   }
 
-
   getRemainingSessionTime(): number {
     return +this.expiresInSeconds - this.sessionTimeDurationSeconds;
+  }
+
+  getMin(): number {
+    return this.min
+  }
+
+  getSec(): number {
+    return this.sec
   }
 
   login(credentials: any): Observable<any>{
