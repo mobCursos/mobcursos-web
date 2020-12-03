@@ -1,4 +1,4 @@
-<div *ngIf="!this.authService.isLoggedIn">
+<div class="" *ngIf="!this.authService.isLoggedIn">
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label for="username">Usuário</label>
@@ -16,5 +16,5 @@
   <p>Confirma encerrar a sessão?</p>
   <button  class="btn btn-primary" (click)="logout()">Sim</button>
 </div>
+<div><button  class="btn btn-secondary" (click)="goBack()">Cancelar</button></div>
 
-<button  class="btn btn-secondary" (click)="goBack()">Cancelar</button>

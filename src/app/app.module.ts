@@ -29,8 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UsersModule,
     CoursesModule,
     AuthModule,
-    AppRoutingModule,
     NgbModule,
+    AppRoutingModule,
   ],
   providers: [
     httpInterceptorProviders

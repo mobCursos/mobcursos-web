@@ -1,41 +1,57 @@
-<nav>
-  <div>
-    <ul ngbNav #nav="ngbNav" class="nav-pills">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">mobCursos</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isMenuCollapsed = !isMenuCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+    <ul ngbNav #nav="ngbNav" class="navbar-nav mr-auto">
+
       <!-- ALLWAYS -->
-      <li ngbNavItem><a ngbNavLink routerLink="/">Home</a></li>
+      <li ngbNavItem (click)="isMenuCollapsed=true"><a ngbNavLink routerLink="/">Home</a></li>
+
       <!-- NO AUTH -->
       <li ngbNavItem *ngIf="!this.authService.isLoggedIn">
-        <a ngbNavLink routerLink="/courses-noauth" routerLinkActive="active">Cursos</a>
+        <a ngbNavLink routerLink="/courses-noauth" routerLinkActive="active" (click)="isMenuCollapsed=true">Cursos</a>
       </li>
+
       <!-- ADMIN -->
-      <div *ngIf="this.authService.userRole == 'admin'">
-          <li ngbNavItem><a ngbNavLink routerLink="/users" routerLinkActive="active">Gerenciar Usuários</a></li>
-          <li ngbNavItem><a ngbNavLink routerLink="/courses" routerLinkActive="active">Gerenciar Cursos</a></li>
-      </div>
-      <!-- STUDENT / TEACHER -->
-      <div *ngIf="this.authService.isLoggedIn && this.authService.userRole != 'admin'">
-          <li ngbNavItem><a ngbNavLink routerLink="/courses" routerLinkActive="active">Meus cursos</a></li>
-          <li ngbNavItem><a ngbNavLink routerLink="/courses/available" routerLinkActive="active">Cursos disponíveis</a></li>             
-      </div>
-      <!-- LOGIN/LOGOUT -->
-      <div>
-        <li ngbNavItem *ngIf="!this.authService.isLoggedIn">
-          <a ngbNavLink routerLink="/login" routerLinkActive="active">Entrar</a>
-        </li>
-        <li ngbNavItem *ngIf="this.authService.isLoggedIn">
-          <a ngbNavLink routerLink="/logout" routerLinkActive="active">Sair</a>
-          <br><span> (Sessão termina em: {{authService.getRemainingSessionTime() | sessionCounter }})</span>
+      <li *ngIf="this.authService.userRole == 'admin'" ngbNavItem ngbDropdown>
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown">
+          Gerenciar
+        </a>
+        <div ngbDropdownMenu>
+          <a ngbDropdownItem routerLink="/users" routerLinkActive="active" (click)="isMenuCollapsed=true">Usuários</a>
+          <a ngbDropdownItem routerLink="/courses" routerLinkActive="active" (click)="isMenuCollapsed=true">Cursos</a>
+        </div>
       </li>
-      </div>
+      <li ngbNavItem></li>
+
+      <!-- STUDENT / TEACHER -->
+      <li ngbNavItem *ngIf="this.authService.isLoggedIn && this.authService.userRole != 'admin'">
+        <a ngbNavLink routerLink="/courses" routerLinkActive="active" (click)="isMenuCollapsed=true">Meus cursos</a>
+      </li>
+      <li ngbNavItem *ngIf="this.authService.isLoggedIn && this.authService.userRole != 'admin'">
+        <a ngbNavLink routerLink="/courses/available" routerLinkActive="active" (click)="isMenuCollapsed=true">Cursos disponíveis</a>
+      </li>  
+ 
     </ul>
+    <div class="my-2 my-lg-0">
+      <!-- LOGIN/LOGOUT -->
+      <div *ngIf="!this.authService.isLoggedIn">
+        <button  class="btn btn-primary" ngbNavLink routerLink="/login" routerLinkActive="active" (click)="isMenuCollapsed=true">Entrar</button>
+      </div>
+      <div *ngIf="this.authService.isLoggedIn">
+        <button  class="btn btn-danger" ngbNavLink routerLink="/logout" routerLinkActive="active" (click)="isMenuCollapsed=true">Sair</button>
+      </div>
+    </div>
   </div>
 </nav>
-<div class="item-hero-text-box">
-  <h1>mobCursos</h1>
-  <p>Cursos online de TI</p>
-  <!-- <a class="btn btn-full" href="login.html">Entrar</a>
-  <a class="btn btn-empty" href="#">Criar conta</a> -->
-</div>
 
+<span class="badge badge-info" *ngIf="this.authService.isLoggedIn">
+  Sessão finaliza em: {{authService.getRemainingSessionTime() | sessionCounter }}
+</span>
+
+<div class="d-flex justify-content-center">
 <router-outlet></router-outlet>
+</div>
 <app-messages></app-messages>
