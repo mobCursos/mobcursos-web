@@ -10,6 +10,7 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   
   title = 'mobcursos-web';
+  public isMenuCollapsed = true;
 
   constructor(public authService: AuthService) {}
   

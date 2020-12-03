@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
 import { httpInterceptorProviders } from './http-interceptors';
 import { SessionCounterPipe } from './session-counter.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SessionCounterPipe } from './session-counter.pipe';
     UsersModule,
     CoursesModule,
     AuthModule,
+    NgbModule,
     AppRoutingModule,
   ],
   providers: [

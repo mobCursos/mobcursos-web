@@ -1,6 +1,6 @@
 <h2>{{title}}</h2>
 <div>
-  <button routerLink="search/">Procurar</button>
+  <button  class="btn btn-primary" routerLink="search/">Procurar</button>
 </div>
 
 <div *ngIf="!this.authService.isLoggedIn; else elseBlock">
@@ -17,7 +17,7 @@
         <td>{{course.description}}</td>
         <!-- TODO: create logic on TS to unauth users - Register or Login -->
         <td>
-          <button routerLink="subscribe/">Inscrever-se</button>
+          <button  class="btn btn-primary" routerLink="subscribe/">Inscrever-se</button>
         </td>
       </tr>
     </table>
@@ -28,8 +28,8 @@
   <container [ngSwitch]="userRole">
     <div *ngSwitchCase="'admin'">
       <div>
-        <button routerLink="form/">Novo</button>
-        <button routerLink="random/">(+ aleatorio)</button>
+        <button  class="btn btn-primary" routerLink="form/">Novo</button>
+        <button  class="btn btn-primary" routerLink="random/">(+ aleatorio)</button>
       </div>
       <div *ngIf="courses$">
         <table>
@@ -44,8 +44,8 @@
             <td>{{course.name}}</td>
             <td>{{course.description}}</td>
             <td>
-              <button routerLink="edit/{{course._id}}">Editar</button>
-              <button routerLink="remove/{{course._id}}">Deletar</button>
+              <button  class="btn btn-primary" routerLink="edit/{{course._id}}">Editar</button>
+              <button  class="btn btn-primary" routerLink="remove/{{course._id}}">Deletar</button>
             </td>
           </tr>
         </table>
@@ -54,8 +54,8 @@
 
     <div *ngSwitchCase="'teacher'">
       <div *ngIf="isOwnCourses">
-        <button routerLink="form/">Novo</button>
-        <button routerLink="random/">(+ aleatorio)</button>
+        <button  class="btn btn-primary" routerLink="form/">Novo</button>
+        <button  class="btn btn-primary" routerLink="random/">(+ aleatorio)</button>
       </div>
       <div *ngIf="courses$">
         <table>
@@ -75,10 +75,10 @@
                 </li>
               </ol>
             <td *ngIf="isOwnCourses">
-              <button *ngIf="isOwnCourses"
+              <button  class="btn btn-primary" *ngIf="isOwnCourses"
                       routerLink="edit/{{course._id}}">Editar info
               </button>
-              <button (click)="deleteCourse(course._id)">Excluir</button>
+              <button  class="btn btn-danger" (click)="deleteCourse(course._id)">Excluir</button>
             </td>
           </tr>
         </table>
@@ -99,10 +99,10 @@
             <td>{{course.description}}</td>
             <td>{{course.teacher.name}}</td>
             <td>
-              <button *ngIf="isOwnCourses"
+              <button  class="btn btn-secondary" *ngIf="isOwnCourses"
                       (click)="unsubscribe(course._id)">Cancelar inscrição
               </button>
-              <button *ngIf="!isOwnCourses"
+              <button  class="btn btn-primary" *ngIf="!isOwnCourses"
                       (click)="subscribe(course._id)">Inscrever-se
               </button>
             </td>
