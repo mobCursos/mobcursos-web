@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "mobcursos-65287": {
+      "hosting": {
+        "mobcursos-web": [
+          "mobcursos-65287"
+        ]
+      }
+    }
+  }
+}
