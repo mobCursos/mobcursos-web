@@ -14,7 +14,7 @@
 <div *ngIf="this.authService.isLoggedIn">
   <h2>Logout</h2>
   <p>Confirma encerrar a sessão?</p>
-  <button (click)="logout()">Sim</button>
+  <button  class="btn btn-primary" (click)="logout()">Sim</button>
 </div>
 
-<button (click)="goBack()">Cancelar</button>
+<button  class="btn btn-secondary" (click)="goBack()">Cancelar</button>
