@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { interval, Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 
 @Component({

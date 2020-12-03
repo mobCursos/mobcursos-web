@@ -11,11 +11,13 @@ import { CoursesModule } from './courses/courses.module';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
 import { httpInterceptorProviders } from './http-interceptors';
+import { SessionCounterPipe } from './session-counter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessagesComponent,
+    SessionCounterPipe,
   ],
   imports: [
     CommonModule,

@@ -32,6 +32,7 @@
           </li>
           <li *ngIf="this.authService.isLoggedIn">
             <a routerLink="/logout" routerLinkActive="active">Sair</a>
+            <br><span> (Sessão termina em: {{authService.getRemainingSessionTime() | sessionCounter }})</span>
         </li>
         </div>
 
