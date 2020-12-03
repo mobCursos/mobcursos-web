@@ -19,7 +19,7 @@ export class AuthService {
   expiresInSeconds: string;
   expiresInDatetime: Date;
 
-  sessionTimeDurationSeconds: number = 0;
+  sessionTimeDurationSeconds: number;
 
   private url = environment.apiUrl + 'login';
 
@@ -60,9 +60,12 @@ export class AuthService {
   startSessionCounter(){
     const secondsCounter = interval(1000);
     const result = secondsCounter.pipe(
-      takeWhile(n => n < +this.expiresInSeconds),
-      // TODO: woarn user to add another session time
-      finalize(() => this.logout()));
+      takeWhile(n => n < +this.expiresInSeconds && this.isLoggedIn ),
+      // TODO: warn user to add another session time
+      finalize(() => {
+        if (this.isLoggedIn) { this.logout(); }
+      } // else, only finalize interval to avoid duplicates
+      ));
     result.subscribe(
       _ => this.sessionTimeDurationSeconds += 1
     )
@@ -73,6 +76,7 @@ export class AuthService {
   }
 
   login(credentials: any): Observable<any>{
+    this.sessionTimeDurationSeconds = 0;
     return this.http.post<any>(this.url, credentials, this.httpOptions)
     .pipe(
       tap(_ => this.log('logged in')),
@@ -86,6 +90,8 @@ export class AuthService {
   logout(): void {
     this.log('logged out')
     this.isLoggedIn = false;
+    // this.sessionTimeDurationSeconds = 0;
+    // this.secondsCounter$.pipe(finalize(()=> console.log('finalize'))).subscribe();
     localStorage.removeItem('token');
     localStorage.removeItem('expiresIn');
     this.userRole = '';
