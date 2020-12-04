@@ -118,8 +118,13 @@
               "devServerTarget": "mobcursos-web:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "mobcursos-web"
 }
