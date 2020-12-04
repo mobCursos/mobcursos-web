@@ -1,12 +1,14 @@
 <h2>{{title}}</h2>
 <div class="my-2">
-  <input type="text" placeholder="Procurar">
-  <!-- <button  class="btn btn-primary m-1" routerLink="search/">Procurar</button> -->
+  <input type="text" id="searchBox" #searchBox [(ngModel)]="courseFilterTerm" placeholder="Pesquisar pelo nome">
+  <!-- <button  class="btn btn-primary m-1" (click)="search(searchBox.value)">Procurar</button> -->
 </div>
-
+<div>
+  <p class="count">Total de cursos: {{((courses$ | async) | courseFilter:courseFilterTerm)?.length}}</p>
+</div>
 <div *ngIf="!this.authService.isLoggedIn; else elseBlock">
-  
-  <div *ngIf="courses$">
+
+  <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
     <table class="table" >
       <thead>
         <tr>
@@ -16,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let course of (courses$ | async)">
+        <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
           <td>{{course.name}}</td>
           <td>{{course.description}}</td>
           <!-- TODO: create logic on TS to unauth users - Register or Login -->
@@ -36,7 +38,7 @@
         <button  class="btn btn-success my-1 mr-1" routerLink="form/">Novo</button>
         <button  class="btn btn-secondary" routerLink="random/">(+ aleatorio)</button>
       </div>
-      <div *ngIf="courses$">
+      <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
         <table class="table" >
           <thead>
             <tr>
@@ -47,7 +49,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let course of (courses$ | async)">
+            <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
               <td>{{course._id}}</td>
               <td>{{course.name}}</td>
               <td>{{course.description}}</td>
@@ -66,7 +68,7 @@
         <button  class="btn btn-success my-1 mr-1" routerLink="form/">Novo</button>
         <button  class="btn btn-primary" routerLink="random/">(+ aleatorio)</button>
       </div>
-      <div *ngIf="courses$">
+      <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
         <table class="table">
           <thead>
             <tr>
@@ -76,7 +78,7 @@
               <th *ngIf="isOwnCourses">Ações</th>
             </tr>
           </thead>
-          <tr *ngFor="let course of (courses$ | async)">
+          <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
             <td>{{course.name}}</td>
             <td>{{course.description}}</td>
             <td *ngIf="isOwnCourses">
@@ -97,7 +99,7 @@
     </div>
 
     <div *ngSwitchCase="'student'">
-      <div *ngIf="courses$">
+      <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
         <table class="table" >
           <thead>
             <tr>
@@ -108,7 +110,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let course of (courses$ | async)">
+            <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
               <td>{{course.name}}</td>
               <td>{{course.description}}</td>
               <td>{{course.teacher.name}}</td>
@@ -132,3 +134,7 @@
 
   </container>
 </ng-template>
+
+<div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length == 0">
+  <p>Nenhum resultado encontrado.</p>
+</div>
