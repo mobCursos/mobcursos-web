@@ -55,3 +55,9 @@
 <router-outlet></router-outlet>
 </div>
 <app-messages></app-messages>
+<ul>
+  <li class="text" *ngFor="let role of roles$ | async">
+    {{role._id}} - {{role.name}} - {{role.description}}
+  </li>
+</ul>
+

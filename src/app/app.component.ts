@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,13 @@ export class AppComponent {
   
   title = 'mobcursos-web';
   public isMenuCollapsed = true;
+  roles$: Observable<any[]>;
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    firestore: AngularFirestore,
+    public authService: AuthService) {
+      this.roles$ = firestore.collection('roles').valueChanges({idField: '_id'});
+  
+    }
   
 }

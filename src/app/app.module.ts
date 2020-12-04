@@ -14,6 +14,11 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { SessionCounterPipe } from './session-counter.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +35,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CoursesModule,
     AuthModule,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule,
     AppRoutingModule,
   ],
   providers: [
