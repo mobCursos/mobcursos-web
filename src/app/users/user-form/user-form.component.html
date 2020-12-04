@@ -1,44 +1,42 @@
-<h3>Cadastro</h3>
+<h3>Cadastro de usuários</h3>
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <label for="_id">
-    ID:
-    <input type="text" formControlName="_id">
-  </label>
-  <br>
-  <label>
-    Categoria
-    <select formControlName="role">
+  <!-- <div class="form-group">
+    <label for="_id">ID</label>
+    <input type="text" formControlName="_id" class="form-control">
+  </div> -->
+
+  <div class="form-group">
+    <label>Categoria</label>
+    <select formControlName="role" class="form-control">
       <option *ngFor="let role of roles" [ngValue]="role">
         {{role | titlecase}}
       </option>
     </select>
-  </label>
-  <br>
-  <label for="name">
-    Nome:
-    <input type="text" formControlName="name" required minlength="3" maxlength="100">
-  </label>
-  <br>
-  <label for="username">
-    Username:
-    <input type="text" formControlName="username" required minlength="3" maxlength="15">
-  </label>
-  <br>
-  <label for="password">
-    Password:
-    <input type="password" formControlName="password" required minlength="3" maxlength="150">
-  </label>
-  <br>
-  <label for="email">
-    E-mail:
-    <input type="email" formControlName="email">
-  </label>
-    
-  <br>
-  <input type="submit" [disabled]="!userForm.valid" value="Salvar">
-  
+  </div>
+
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input type="text" formControlName="name" class="form-control" required minlength="3" maxlength="100">
+  </div>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" formControlName="username" class="form-control" required minlength="3" maxlength="15">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" class="form-control" required minlength="3" maxlength="150">
+  </div>
+
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" formControlName="email" class="form-control">
+  </div>
+
+  <input type="submit" class="btn btn-success my-2 mr-1" [disabled]="!userForm.valid" value="Salvar">
 </form>
 
-<button  class="btn btn-primary" (click)="onReset()">{{resetButtonText}}</button>
-<button  class="btn btn-primary" (click)="goBack()">{{backButtonText}}</button>
+<button  class="btn btn-warning mr-1" (click)="onReset()">{{resetButtonText}}</button>
+<button  class="btn btn-secondary" (click)="goBack()">{{backButtonText}}</button>
