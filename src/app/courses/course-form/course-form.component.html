@@ -1,6 +1,8 @@
+<div class="d-flex justify-content-center">
+  <div class="ngComponentItem">
 <h3>Cadastro de Cursos</h3>
 
-<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="courseForm">
     <!-- <div class="form-group">
       <label for="_id">ID</label>
       <input type="text" formControlName="_id" class="form-control">
@@ -21,3 +23,5 @@
 
 <button  class="btn btn-warning mr-1" (click)="onReset()">{{resetButtonText}}</button>
 <button  class="btn btn-secondary" (click)="goBack()">{{backButtonText}}</button>
+</div>
+</div>

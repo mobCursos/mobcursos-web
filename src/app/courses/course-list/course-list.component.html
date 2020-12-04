@@ -1,3 +1,5 @@
+<div class="d-flex justify-content-center">
+<div class="ngComponentItem">
 <h2>{{title}}</h2>
 <div class="my-2">
   <input type="text" id="searchBox" #searchBox [(ngModel)]="courseFilterTerm" placeholder="Pesquisar pelo nome">
@@ -137,4 +139,6 @@
 
 <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length == 0">
   <p>Nenhum resultado encontrado.</p>
+</div>
+</div>
 </div>

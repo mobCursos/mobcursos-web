@@ -1,3 +1,7 @@
 .count {
   color: lightgray;
 }
+
+.ngComponentItem {
+  width: 80%;
+}
