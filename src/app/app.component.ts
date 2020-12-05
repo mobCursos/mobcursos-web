@@ -25,7 +25,7 @@ export class AppComponent {
 
       const ref = this.storage.ref('github.png');
       this.imageUrl = ref.getDownloadURL();
-  
+
     }
   
 }

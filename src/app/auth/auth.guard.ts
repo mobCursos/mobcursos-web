@@ -16,8 +16,9 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree {
-    const url: string = state.url;
-    console.warn('authGuard - STATE URL: ', url)
+    // const url: string = state.url;
+    const url:string = '/';
+    console.warn('authGuard - STATE URL: ', url);
     
     return this.checkLogin(url) && this.authService.isSessionValid();
   }

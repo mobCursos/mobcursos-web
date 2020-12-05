@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
+import { HomeModule } from './home/home.module';
+
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { CommonModule } from '@angular/common';
@@ -19,14 +21,12 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessagesComponent,
     SessionCounterPipe,
-    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +34,7 @@ import { HomeComponent } from './home/home/home.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HomeModule,
     UsersModule,
     CoursesModule,
     AuthModule,

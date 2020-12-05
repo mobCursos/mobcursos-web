@@ -7,7 +7,7 @@
     <ul ngbNav #nav="ngbNav" class="navbar-nav mr-auto">
 
       <!-- ALLWAYS -->
-      <li ngbNavItem (click)="isMenuCollapsed=true"><a ngbNavLink routerLink="/">Home</a></li>
+      <li ngbNavItem (click)="isMenuCollapsed=true"><a ngbNavLink routerLink={{this.authService.redirectUrl}}>Home</a></li>
 
       <!-- NO AUTH -->
       <li ngbNavItem *ngIf="!this.authService.isLoggedIn">
