@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -38,10 +39,12 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AppRoutingModule,
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    { provide: BUCKET, useValue: environment.firebase.storageBucket }
   ],
   bootstrap: [AppComponent]
 })
