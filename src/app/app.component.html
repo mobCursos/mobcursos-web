@@ -47,13 +47,15 @@
   </div>
 </nav>
 
-<span class="badge badge-info" *ngIf="this.authService.isLoggedIn">
-  Sessão finaliza em: {{authService.getRemainingSessionTime() | sessionCounter }}
-</span>
-
-<div class="d-flex justify-content-center">
-<router-outlet></router-outlet>
+<div class="d-flex flex-row justify-content-end m-1">
+    <span class="badge badge-secondary" *ngIf="this.authService.isLoggedIn">
+      Sessão finaliza em: {{authService.getRemainingSessionTime() | sessionCounter }}
+    </span>
 </div>
+
+
+<router-outlet></router-outlet>
+
 <app-messages></app-messages>
 <ul>
   <li class="text" *ngFor="let role of roles$ | async">

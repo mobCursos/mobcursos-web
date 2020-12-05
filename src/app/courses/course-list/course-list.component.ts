@@ -20,6 +20,7 @@ export class CourseListComponent implements OnInit {
   currentRoute: string;
   isOwnCourses: boolean;
   title: string;
+  courseFilterTerm:string = '';
 
   constructor(
     private courseService: CourseService,

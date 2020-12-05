@@ -1,8 +1,7 @@
-table, th, td {
-  border: 1pt solid blue;
-  border-collapse: collapse;
+.count {
+  color: lightgray;
 }
 
-th, td {
-  padding: 10px;
+.ngComponentItem {
+  width: 80%;
 }

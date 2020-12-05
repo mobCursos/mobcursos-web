@@ -46,7 +46,7 @@ export class UserFormComponent implements OnInit {
       this.userForm.patchValue(this.getMockUser());
     }
     else if(this.id){
-      this.getUserInForm();     
+      this.getUserInForm(); 
     }
     
     // this.userForm.get('_id').disable(); /** TODO: automatic id from server */

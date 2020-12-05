@@ -1,25 +1,34 @@
+<div class="d-flex justify-content-center">
+<div class="ngComponentItem">
 <h2>{{title}}</h2>
-<div>
-  <button  class="btn btn-primary" routerLink="search/">Procurar</button>
+<div class="my-2">
+  <input type="text" id="searchBox" #searchBox [(ngModel)]="courseFilterTerm" placeholder="Pesquisar pelo nome">
+  <!-- <button  class="btn btn-primary m-1" (click)="search(searchBox.value)">Procurar</button> -->
 </div>
-
+<div>
+  <p class="count">Total de cursos: {{((courses$ | async) | courseFilter:courseFilterTerm)?.length}}</p>
+</div>
 <div *ngIf="!this.authService.isLoggedIn; else elseBlock">
-  
-  <div *ngIf="courses$">
-    <table>
-      <tr>
-        <td>Nome</td>
-        <td>Descrição</td>
-        <td>Ações</td>
-      </tr>
-      <tr *ngFor="let course of (courses$ | async)">
-        <td>{{course.name}}</td>
-        <td>{{course.description}}</td>
-        <!-- TODO: create logic on TS to unauth users - Register or Login -->
-        <td>
-          <button  class="btn btn-primary" routerLink="subscribe/">Inscrever-se</button>
-        </td>
-      </tr>
+
+  <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
+    <table class="table" >
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
+          <td>{{course.name}}</td>
+          <td>{{course.description}}</td>
+          <!-- TODO: create logic on TS to unauth users - Register or Login -->
+          <td>
+            <button  class="btn btn-success" routerLink="subscribe/">Inscrever-se</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>
@@ -28,44 +37,50 @@
   <container [ngSwitch]="userRole">
     <div *ngSwitchCase="'admin'">
       <div>
-        <button  class="btn btn-primary" routerLink="form/">Novo</button>
-        <button  class="btn btn-primary" routerLink="random/">(+ aleatorio)</button>
+        <button  class="btn btn-success my-1 mr-1" routerLink="form/">Novo</button>
+        <button  class="btn btn-secondary" routerLink="random/">(+ aleatorio)</button>
       </div>
-      <div *ngIf="courses$">
-        <table>
-          <tr>
-            <td>ID</td>
-            <td>Curso</td>
-            <td>Descrição</td>
-            <td>Ações</td>
-          </tr>
-          <tr *ngFor="let course of (courses$ | async)">
-            <td>{{course._id}}</td>
-            <td>{{course.name}}</td>
-            <td>{{course.description}}</td>
-            <td>
-              <button  class="btn btn-primary" routerLink="edit/{{course._id}}">Editar</button>
-              <button  class="btn btn-primary" routerLink="remove/{{course._id}}">Deletar</button>
-            </td>
-          </tr>
+      <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
+        <table class="table" >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Curso</th>
+              <th>Descrição</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
+              <td>{{course._id}}</td>
+              <td>{{course.name}}</td>
+              <td>{{course.description}}</td>
+              <td>
+                <button  class="btn btn-primary mx-1" routerLink="edit/{{course._id}}">Editar</button>
+                <button  class="btn btn-danger" routerLink="remove/{{course._id}}">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
 
     <div *ngSwitchCase="'teacher'">
       <div *ngIf="isOwnCourses">
-        <button  class="btn btn-primary" routerLink="form/">Novo</button>
+        <button  class="btn btn-success my-1 mr-1" routerLink="form/">Novo</button>
         <button  class="btn btn-primary" routerLink="random/">(+ aleatorio)</button>
       </div>
-      <div *ngIf="courses$">
-        <table>
-          <tr>
-            <td>Curso</td>
-            <td>Descrição</td>
-            <td *ngIf="isOwnCourses">Alunos</td>
-            <td *ngIf="isOwnCourses">Ações</td>
-          </tr>
-          <tr *ngFor="let course of (courses$ | async)">
+      <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Curso</th>
+              <th>Descrição</th>
+              <th *ngIf="isOwnCourses">Alunos</th>
+              <th *ngIf="isOwnCourses">Ações</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
             <td>{{course.name}}</td>
             <td>{{course.description}}</td>
             <td *ngIf="isOwnCourses">
@@ -78,7 +93,7 @@
               <button  class="btn btn-primary" *ngIf="isOwnCourses"
                       routerLink="edit/{{course._id}}">Editar info
               </button>
-              <button  class="btn btn-danger" (click)="deleteCourse(course._id)">Excluir</button>
+              <button  class="btn btn-danger mx-1" (click)="deleteCourse(course._id)">Excluir</button>
             </td>
           </tr>
         </table>
@@ -86,27 +101,31 @@
     </div>
 
     <div *ngSwitchCase="'student'">
-      <div *ngIf="courses$">
-        <table>
-          <tr>
-            <td>Curso</td>
-            <td>Descrição</td>
-            <td>Instrutor(a)</td>
-            <td>Ações</td>
-          </tr>
-          <tr *ngFor="let course of (courses$ | async)">
-            <td>{{course.name}}</td>
-            <td>{{course.description}}</td>
-            <td>{{course.teacher.name}}</td>
-            <td>
-              <button  class="btn btn-secondary" *ngIf="isOwnCourses"
-                      (click)="unsubscribe(course._id)">Cancelar inscrição
-              </button>
-              <button  class="btn btn-primary" *ngIf="!isOwnCourses"
-                      (click)="subscribe(course._id)">Inscrever-se
-              </button>
-            </td>
-          </tr>
+      <div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length > 0">
+        <table class="table" >
+          <thead>
+            <tr>
+              <th>Curso</th>
+              <th>Descrição</th>
+              <th>Instrutor(a)</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
+              <td>{{course.name}}</td>
+              <td>{{course.description}}</td>
+              <td>{{course.teacher.name}}</td>
+              <td>
+                <button  class="btn btn-danger" *ngIf="isOwnCourses"
+                        (click)="unsubscribe(course._id)">Cancelar inscrição
+                </button>
+                <button  class="btn btn-success" *ngIf="!isOwnCourses"
+                        (click)="subscribe(course._id)">Inscrever-se
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -117,3 +136,9 @@
 
   </container>
 </ng-template>
+
+<div *ngIf="((courses$ | async) | courseFilter:courseFilterTerm)?.length == 0">
+  <p>Nenhum resultado encontrado.</p>
+</div>
+</div>
+</div>
