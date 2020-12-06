@@ -75,8 +75,8 @@ export class AuthService {
     return +this.expiresInSeconds - this.sessionTimeDurationSeconds;
   }
 
-  setHomePage():void {
-    this.redirectUrl =  `/home/${this.userRole}`;
+  setHomePage(path: string):void {
+    this.redirectUrl =  `${path}`;
   }
 
   login(credentials: any): Observable<any>{
@@ -87,7 +87,7 @@ export class AuthService {
       tap(res => this.setSession(res)),
       tap(_ => this.startSessionCounter()),
       tap(_ => this.isLoggedIn = true),
-      tap(_ => this.setHomePage()),
+      tap(_ => this.setHomePage(`/home/${this.userRole}`)),
       catchError(this.handleError<any>('login'))
     )
   }
@@ -100,6 +100,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiresIn');
     this.userRole = '';
+    this.setHomePage('');
   }
 
   /** Log a message with the service */
