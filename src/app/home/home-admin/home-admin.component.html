@@ -1,15 +1,54 @@
 <div class="container-admin">
   <div class="container-item">
     <h2 class="ml-3 pt-4">Painel do Administrador</h2>
-    <div class="container-buttons">
-      <button type="button" routerLink="/users" routerLinkActive="active"
-             class="btn btn-primary btn-lg mt-5 m-3">
-             Gerenciar Usuários
-      </button>
-      <button type="button" routerLink="/courses" routerLinkActive="active"
-             class="btn btn-secondary btn-lg mt-5 m-3">
-             Gerenciar Cursos
-      </button>
+    <div class="container-buttons m-5">
+      <div class="mb-5">
+        <h3>Usuários cadastrados</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th class="quantity">Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Administradores</td><td class="quantity">{{totalUsersAdmin}}</td></tr>
+            <tr><td>Professores</td><td class="quantity">{{totalUsersTeacher}}</td></tr>
+            <tr><td>Alunos</td><td class="quantity">{{totalUsersStudent}}</td></tr>
+            <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalUsers}}</strong></td></tr>
+          </tbody>
+        </table>
+
+        <button type="button" routerLink="/users" routerLinkActive="active"
+        class="btn btn-primary btn-lg">
+        Gerenciar Usuários
+        </button>
+      </div>
+      
+      <div class="mb-5">
+        <h3>Cursos cadastrados</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Assunto</th>
+              <th class="quantity">Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalCourses}}</strong></td></tr>
+          </tbody>
+        </table>
+
+
+        <button type="button" routerLink="/courses" routerLinkActive="active"
+        class="btn btn-secondary btn-lg">
+        Gerenciar Cursos
+        </button>
+      
     </div>
+
+      </div>
+
+      
   </div> 
 </div>
