@@ -12,7 +12,7 @@ export class AuthService {
   isLoggedIn = false;
 
   // redirect after logggin in
-  redirectUrl: string = '/';
+  redirectUrl: string;
 
   userRole: string;
   expiresIn: string; // milisseconds
@@ -75,6 +75,10 @@ export class AuthService {
     return +this.expiresInSeconds - this.sessionTimeDurationSeconds;
   }
 
+  setHomePage(path: string):void {
+    this.redirectUrl =  `${path}`;
+  }
+
   login(credentials: any): Observable<any>{
     this.sessionTimeDurationSeconds = 0;
     return this.http.post<any>(this.url, credentials, this.httpOptions)
@@ -83,6 +87,7 @@ export class AuthService {
       tap(res => this.setSession(res)),
       tap(_ => this.startSessionCounter()),
       tap(_ => this.isLoggedIn = true),
+      tap(_ => this.setHomePage(`/home/${this.userRole}`)),
       catchError(this.handleError<any>('login'))
     )
   }
@@ -95,6 +100,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiresIn');
     this.userRole = '';
+    this.setHomePage('');
   }
 
   /** Log a message with the service */

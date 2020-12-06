@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
+import { HomeModule } from './home/home.module';
+
 import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { CommonModule } from '@angular/common';
@@ -17,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -31,6 +34,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HomeModule,
     UsersModule,
     CoursesModule,
     AuthModule,
@@ -38,10 +42,12 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AppRoutingModule,
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    { provide: BUCKET, useValue: environment.firebase.storageBucket }
   ],
   bootstrap: [AppComponent]
 })

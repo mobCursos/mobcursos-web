@@ -1,0 +1,26 @@
+.container-admin {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)),
+                    url('../../../assets/img/hero.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 30%;
+  height: 100vh;
+}
+
+/* .container-item {
+
+} */
+
+.container-buttons {
+  max-width: 60%;
+}
+
+.table {
+  background-color: white;
+  max-width: 50%;
+}
+
+table .quantity {
+  text-align:right;
+}

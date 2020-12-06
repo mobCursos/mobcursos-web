@@ -1,0 +1,12 @@
+.container-buttons {
+  max-width: 60%;
+}
+
+.table {
+  background-color: white;
+  max-width: 50%;
+}
+
+table .quantity {
+  text-align:right;
+}

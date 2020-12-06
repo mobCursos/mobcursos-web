@@ -5,3 +5,7 @@
 .ngComponentItem {
   width: 80%;
 }
+
+.table td, .table th {
+  max-width: 300px;
+}
