@@ -42,9 +42,6 @@ export class CourseListComponent implements OnInit {
       this.title = 'Meus Cursos';
       this.isOwnCourses = true;
     }
-    if (this.currentRoute == "remove/:id") {
-      this.deleteCourse(this.id);
-    }
   }
 
   getCourses(): void {
