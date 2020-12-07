@@ -5,6 +5,8 @@ import { Location } from "@angular/common";
 import { CourseService } from "../course.service";
 import { Course } from '../interfaces/course';
 import { CATEGORIES } from '../mocks/course-categories';
+import { CategoryService } from '../category.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -18,16 +20,18 @@ export class CourseFormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private courseService: CourseService,
+    private categoryService: CategoryService,
     private location: Location
     ) { }
 
   course: Course;
 
-  categories = CATEGORIES;
+  categories$: Observable<any>;
 
   courseForm = this.fb.group({
     _id: [null],
     name: ['', Validators.required],
+    category: ['', Validators.required],
     description: ['', Validators.required],
   });
 
@@ -44,6 +48,7 @@ export class CourseFormComponent implements OnInit {
       this.courseForm.patchValue(this.getMockCourse());
     }
     else if(this.id){
+      this.categories$ = this.categoryService.getCategories();
       this.getCourseInForm();     
     }
     

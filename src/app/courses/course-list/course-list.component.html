@@ -14,7 +14,8 @@
     <table class="table" >
       <thead>
         <tr>
-          <th>Nome</th>
+          <th>Curso</th>
+          <th>Categoria</th>
           <th>Descrição</th>
           <th></th>
         </tr>
@@ -22,6 +23,7 @@
       <tbody>
         <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
           <td>{{course.name}}</td>
+          <td>{{course.category}}</td>
           <td>{{course.description}}</td>
           <!-- TODO: create logic on TS to unauth users - Register or Login -->
           <td>
@@ -46,6 +48,7 @@
             <tr>
               <th>ID</th>
               <th>Curso</th>
+              <th>Categoria</th>
               <th>Descrição</th>
               <th>Ações</th>
             </tr>
@@ -54,6 +57,7 @@
             <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
               <td>{{course._id}}</td>
               <td>{{course.name}}</td>
+              <td>{{course.category}}</td>
               <td>{{course.description}}</td>
               <td>
                 <button  class="btn btn-primary btn-sm mr-1 my-1" routerLink="edit/{{course._id}}">Editar</button>
@@ -75,6 +79,7 @@
           <thead>
             <tr>
               <th>Curso</th>
+              <th>Categoria</th>
               <th>Descrição</th>
               <th *ngIf="isOwnCourses">Alunos</th>
               <th *ngIf="isOwnCourses">Ações</th>
@@ -82,6 +87,7 @@
           </thead>
           <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
             <td>{{course.name}}</td>
+            <td>{{course.category}}</td>
             <td>{{course.description}}</td>
             <td *ngIf="isOwnCourses">
               <ol>
@@ -106,6 +112,7 @@
           <thead>
             <tr>
               <th>Curso</th>
+              <th>Categoria</th>
               <th>Descrição</th>
               <th>Instrutor(a)</th>
               <th>Ações</th>
@@ -114,6 +121,7 @@
           <tbody>
             <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
               <td>{{course.name}}</td>
+              <td>{{course.category}}</td>
               <td>{{course.description}}</td>
               <td>{{course.teacher.name}}</td>
               <td>
