@@ -14,7 +14,6 @@ const routes: Routes = [
           { path: 'form', component: UserFormComponent },
           { path: 'random', component: UserFormComponent }, /** ONLY FOR DEVELOPMENT/TESTS */
           { path: 'edit/:id', component: UserFormComponent },
-          { path: 'remove/:id', component: UserListComponent },
         ]
       },
     ]

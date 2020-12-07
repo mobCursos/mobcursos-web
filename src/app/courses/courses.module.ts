@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseFilterPipe } from './course-filter.pipe';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
     CourseListComponent,
     CourseFilterPipe,
     CategoryListComponent,
+    CategoryFormComponent,
   ],
   imports: [
     CommonModule,

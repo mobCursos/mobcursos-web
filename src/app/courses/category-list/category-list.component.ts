@@ -13,7 +13,7 @@ import { Location } from "@angular/common";
 })
 export class CategoryListComponent implements OnInit {
 
-  title:string = 'Cadastro de Categorias de Curso'
+  title:string = 'Categorias de Curso'
 
   categories$: Observable<any[]>;
   id: string = this.route.snapshot.paramMap.get('id');
@@ -29,18 +29,16 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.currentRoute = this.route.snapshot.routeConfig.path;
-    
   }
 
   getCategories(): void {
       this.categories$ = this.categoryService.getCategories();
   }
 
-  // deleteCategory(id: string): void {
-  //   this.categorieservice.deleteCategory(id)
-  //     .subscribe(() => this.getCategories());
-  // }
+  deleteCategory(id: string): void {
+    this.categoryService.deleteCategory(id);
+    this.getCategories();
+  }
 
   goBack(): void {
     this.location.back();

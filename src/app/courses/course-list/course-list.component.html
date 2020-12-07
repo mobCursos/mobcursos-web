@@ -57,7 +57,7 @@
               <td>{{course.description}}</td>
               <td>
                 <button  class="btn btn-primary btn-sm mr-1 my-1" routerLink="edit/{{course._id}}">Editar</button>
-                <button  class="btn btn-danger btn-sm my-1" routerLink="remove/{{course._id}}">Excluir</button>
+                <button  class="btn btn-danger btn-sm my-1" (click)="deleteCourse(course._id)">Excluir</button>
               </td>
             </tr>
           </tbody>
