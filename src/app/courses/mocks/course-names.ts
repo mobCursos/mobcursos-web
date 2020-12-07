@@ -1,0 +1,1 @@
+export const MOCK_COURSE_NAMES = ['algoritmos', 'redes', 'banco de dados'];

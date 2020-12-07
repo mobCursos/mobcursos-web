@@ -15,6 +15,7 @@
       <thead>
         <tr>
           <th>Curso</th>
+          <th>Professor(a)</th>
           <th>Categoria</th>
           <th>Descrição</th>
           <th></th>
@@ -23,6 +24,7 @@
       <tbody>
         <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
           <td>{{course.name}}</td>
+          <td>{{course.teacher.name}}</td>
           <td>{{course.category}}</td>
           <td>{{course.description}}</td>
           <!-- TODO: create logic on TS to unauth users - Register or Login -->
@@ -48,6 +50,7 @@
             <tr>
               <th>ID</th>
               <th>Curso</th>
+              <th>Professor(a)</th>
               <th>Categoria</th>
               <th>Descrição</th>
               <th>Ações</th>
@@ -57,11 +60,12 @@
             <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
               <td>{{course._id}}</td>
               <td>{{course.name}}</td>
+              <td>{{course.teacher.name}}</td>
               <td>{{course.category}}</td>
               <td>{{course.description}}</td>
               <td>
-                <button  class="btn btn-primary btn-sm mr-1 my-1" routerLink="edit/{{course._id}}">Editar</button>
-                <button  class="btn btn-danger btn-sm my-1" (click)="deleteCourse(course._id)">Excluir</button>
+                <button  class="btn btn-primary btn-sm mr-1 mb-1" routerLink="edit/{{course._id}}">Editar</button>
+                <button  class="btn btn-danger btn-sm mr-1 mb-1" (click)="deleteCourse(course._id)">Excluir</button>
               </td>
             </tr>
           </tbody>
@@ -99,7 +103,7 @@
               <button  class="btn btn-primary btn-sm mr-1 my-1" *ngIf="isOwnCourses"
                       routerLink="edit/{{course._id}}">Editar info
               </button>
-              <button  class="btn btn-danger btn-sm my-1" (click)="deleteCourse(course._id)">Excluir</button>
+              <button  class="btn btn-danger btn-sm mr-1 mb-1" (click)="deleteCourse(course._id)">Excluir</button>
             </td>
           </tr>
         </table>
@@ -112,6 +116,7 @@
           <thead>
             <tr>
               <th>Curso</th>
+              <th>Professor(a)</th>
               <th>Categoria</th>
               <th>Descrição</th>
               <th>Instrutor(a)</th>
@@ -121,14 +126,15 @@
           <tbody>
             <tr *ngFor="let course of (courses$ | async) | courseFilter:courseFilterTerm">
               <td>{{course.name}}</td>
+              <td>{{course.teacher.name}}</td>
               <td>{{course.category}}</td>
               <td>{{course.description}}</td>
               <td>{{course.teacher.name}}</td>
               <td>
-                <button  class="btn btn-danger btn-sm mr-1 my-1" *ngIf="isOwnCourses"
+                <button  class="btn btn-danger btn-sm mr-1 mb-1" *ngIf="isOwnCourses"
                         (click)="unsubscribe(course._id)">Cancelar inscrição
                 </button>
-                <button  class="btn btn-success btn-sm my-1" *ngIf="!isOwnCourses"
+                <button  class="btn btn-success btn-sm mr-1 mb-1" *ngIf="!isOwnCourses"
                         (click)="subscribe(course._id)">Inscrever-se
                 </button>
               </td>

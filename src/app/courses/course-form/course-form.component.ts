@@ -4,9 +4,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { CourseService } from "../course.service";
 import { Course } from '../interfaces/course';
-import { CATEGORIES } from '../mocks/course-categories';
 import { CategoryService } from '../category.service';
 import { Observable } from 'rxjs';
+import { MOCK_COURSE_NAMES } from '../mocks/course-names';
 
 
 @Component({
@@ -42,13 +42,13 @@ export class CourseFormComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.categories$ = this.categoryService.getCategories();
     /** ONLY FOR DEVELOPMENT/TESTS */
     // console.warn("Rota: ",this.route.snapshot.routeConfig.path);
     if (this.route.snapshot.routeConfig.path == "random") {
       this.courseForm.patchValue(this.getMockCourse());
     }
     else if(this.id){
-      this.categories$ = this.categoryService.getCategories();
       this.getCourseInForm();     
     }
     
@@ -85,16 +85,17 @@ export class CourseFormComponent implements OnInit {
   getMockCourse() {
     
     const mockCategoryIndex = Math.floor(Math.random() * 3); /* 0 a 2 */
-    const mockCategory = CATEGORIES[mockCategoryIndex];
+    const mockName = MOCK_COURSE_NAMES[mockCategoryIndex];
     const mockCourseNumber = (100 + Math.floor(Math.random() * 900)).toString();  /* 100 a 999 */
-    const mockCourse = mockCategory + mockCourseNumber;
+    const mockCourse = `${mockName} ${mockCourseNumber}`;
     
     const course = {
       "teacher": null,
       "students": [],
       "_id": null,
       "name": mockCourse,
-      "description": mockCourse,
+      "category": null,
+      "description": mockCourse + 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla a nobis, id consectetur veniam, veritatis quos maiores dolor!', 
     }
     return course
   }
