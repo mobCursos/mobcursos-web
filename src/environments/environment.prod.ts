@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: "https://mobcursos-api.herokuapp.com/",
+  apiUrl: "https://mobcursos-api.herokuapp.com/api/",
   firebase: {
     apiKey: "AIzaSyCVNwq3A4pvqFqslPoovXf9HKyp7O2Cdjc",
     authDomain: "mobcursos-65287.firebaseapp.com",
