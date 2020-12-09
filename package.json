@@ -1,13 +1,19 @@
 {
   "name": "mobcursos-web",
   "version": "0.0.0",
+  "engines": {
+    "node": "12.16.x",
+    "npm": "6.13.x"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --o",
+    "dev": "ng serve --o",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +29,7 @@
     "@angular/router": "~10.1.6",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
     "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
     "firebase": "^7.0 || ^8.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
