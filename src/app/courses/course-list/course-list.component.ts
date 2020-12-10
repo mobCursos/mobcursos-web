@@ -57,8 +57,10 @@ export class CourseListComponent implements OnInit {
   }
 
   deleteCourse(id: string): void {
-    this.courseService.deleteCourse(id)
+    if (window.confirm('Confirma excluir?')) {
+      this.courseService.deleteCourse(id)
       .subscribe(() => this.getCourses());
+    }
   }
 
   subscribe(id: string): void {

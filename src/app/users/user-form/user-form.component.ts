@@ -63,16 +63,25 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     if(this.userForm.value._id) {
       this.userService.updateUser(this.userForm.value)
-      .subscribe(() => this.goBack())
+      .subscribe({
+        next: () => alert('Dados atualizados com sucesso.'),
+        error: () => alert('Erro ao atualizar dados.'),
+        complete: () => this.goBack()
+      })
     } else {
       this.userService.createUser(this.userForm.value)
-      .subscribe(() => this.goBack())
+      .subscribe({
+        next: () => alert('Novo usuário adicionado com sucesso.'),
+        error: () => alert('Erro ao adicionar o usuário.'),
+        complete: () => this.goBack()
+      })
     }
   }
 
   onReset(): void {
     this.userForm.reset();
   }
+  
   goBack(): void {
     this.onReset();
     this.location.back();

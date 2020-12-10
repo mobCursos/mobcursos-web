@@ -36,8 +36,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteCategory(id: string): void {
-    this.categoryService.deleteCategory(id);
-    this.getCategories();
+    if (window.confirm('Confirma excluir?')) {
+      this.categoryService.deleteCategory(id);
+      this.getCategories();
+    }
   }
 
   goBack(): void {

@@ -37,8 +37,10 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(id: string): void {
-    this.userService.deleteUser(id)
-      .subscribe(() => this.getUsers());
+    if (window.confirm('Confirma excluir?')) {
+      this.userService.deleteUser(id)
+        .subscribe(() => this.getUsers());
+    }
   }
 
 }

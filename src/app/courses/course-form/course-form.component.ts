@@ -66,16 +66,25 @@ export class CourseFormComponent implements OnInit {
   onSubmit() {
     if(this.courseForm.value._id) {
       this.courseService.updateCourse(this.courseForm.value)
-      .subscribe(() => this.goBack())
+      .subscribe({
+        next: () => alert('Dados atualizados com sucesso.'),
+        error: () => alert('Erro ao atualizar dados.'),
+        complete: () => this.goBack()
+      })
     } else {
       this.courseService.createCourse(this.courseForm.value)
-      .subscribe(() => this.goBack())
+      .subscribe({
+        next: () => alert('Novo curso criado com sucesso.'),
+        error: () => alert('Erro ao criar o curso.'),
+        complete: () => this.goBack()
+      })
     }
   }
 
   onReset(): void {
     this.courseForm.reset();
   }
+
   goBack(): void {
     this.onReset();
     this.location.back();

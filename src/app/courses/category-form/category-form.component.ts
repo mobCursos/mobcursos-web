@@ -49,19 +49,22 @@ export class CategoryFormComponent implements OnInit {
 
   onSubmit() {
     if(this.categoryForm.value._id) {
-      this.categoryService.updateCategory(this.categoryForm.value);
-      this.goBack();
+      this.categoryService.updateCategory(this.categoryForm.value)
+      .then(() => alert('Dados atualizados com sucesso.'))
+      .catch(() => alert('Erro ao atualizar dados.'))
+      .finally(() => this.goBack())
     } else {
-      this.categoryService.createCategory(this.categoryForm.value);
-      this.goBack();
+      this.categoryService.createCategory(this.categoryForm.value)
+      .then(() => alert('Nova categoria criada com sucesso.'))
+      .catch(() => alert('Erro ao criar categoria.'))
+      .finally(() => this.goBack())
     }
-    // TODO: verify error (user observable?)
-    
   }
 
   onReset(): void {
     this.categoryForm.reset();
   }
+
   goBack(): void {
     this.onReset();
     this.location.back();
