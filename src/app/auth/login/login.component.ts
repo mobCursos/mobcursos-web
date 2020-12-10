@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MessageService } from '../../message.service';
 import { AuthService} from '../auth.service';
 import { Location } from "@angular/common";
@@ -19,9 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     public authService: AuthService,
-    public router: Router,
     private location: Location,
   ) { }
 
@@ -37,10 +34,7 @@ export class LoginComponent implements OnInit {
       password: password
     };
 
-    this.authService.login(credentials).subscribe(
-      () => this.router.navigate([this.authService.redirectUrl])
-    );
-
+    this.authService.login(credentials)
   }
 
   logout(): void {

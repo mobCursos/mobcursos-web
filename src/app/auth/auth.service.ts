@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, finalize, takeWhile, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -32,7 +33,8 @@ export class AuthService {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
   ) { }
 
   private setSession(authResult: any) {
@@ -79,17 +81,27 @@ export class AuthService {
     this.redirectUrl =  `${path}`;
   }
 
-  login(credentials: any): Observable<any>{
+  login(credentials: any): void{
     this.sessionTimeDurationSeconds = 0;
-    return this.http.post<any>(this.url, credentials, this.httpOptions)
-    .pipe(
-      tap(_ => this.log('logged in')),
-      tap(res => this.setSession(res)),
-      tap(_ => this.startSessionCounter()),
-      tap(_ => this.isLoggedIn = true),
-      tap(_ => this.setHomePage(`/home/${this.userRole}`)),
-      catchError(this.handleError<any>('login'))
-    )
+    this.http.post<any>(this.url, credentials, this.httpOptions)
+    .subscribe({
+      next: res => {
+        console.log('Login Authorized');
+        this.setSession(res),
+        this.startSessionCounter();
+        this.isLoggedIn = true;
+        this.setHomePage(`/home/${this.userRole}`);
+        this.router.navigate([this.redirectUrl]);
+      },
+      error: err => {
+        console.log('ERRO: ', err.message);
+        this.handleError<any>('login');
+        if(err.status == 401) { alert('Usuário e/ou Senha incorretos.')}
+        else {
+          alert('Erro no servidor.')
+        }        
+      }
+      })
   }
 
   logout(): void {
