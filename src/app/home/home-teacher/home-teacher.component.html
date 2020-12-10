@@ -1,29 +1,31 @@
+<h2 class="ml-3 pt-4">Painel do Professor</h2>
 <div class="container-teacher">
+  
   <div class="container-item">
-    <h2 class="ml-3 pt-4">Painel do Professor</h2>
-    <div class="container-buttons m-5">
-      <div class="mb-5">
-        <h3>Meus Cursos</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Assunto</th>
-              <th class="quantity">Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalCourses}}</strong></td></tr>
-          </tbody>
-        </table>
-        <button type="button" routerLink="/courses" routerLinkActive="active"
-        class="btn btn-primary btn-lg">
-        Gerenciar Meus Cursos
-        </button>
-      </div>
-      <button type="button" routerLink="/courses/available" routerLinkActive="active"
-        class="btn btn-secondary btn-lg">
-        Cursos de outros porfessores
-      </button>
-    </div>
-  </div> 
+    <h3>Meus Cursos</h3>
+    <button type="button" routerLink="/courses" routerLinkActive="active"
+    class="btn btn-primary btn-lg mb-2">
+    Gerenciar Meus Cursos
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Assunto</th>
+          <th class="quantity">Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalCourses}}</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
+
+
+
+<button type="button" routerLink="/courses/available" routerLinkActive="active"
+class="btn btn-secondary btn-lg m-5">
+Cursos de outros professores
+</button>
+
