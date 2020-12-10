@@ -5,6 +5,7 @@ import { catchError, map, tap, retry } from 'rxjs/operators';
 import { User } from "./interfaces/user";
 import { environment } from 'src/environments/environment';
 import { MessageService } from '../message.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
     ) { }
 
   private usersUrl = environment.apiUrl + "users";
@@ -80,6 +82,33 @@ export class UserService {
 
     // TODO: api user route - add function (do not verify duplicated usernames, etc)
     // return this.http.post<User>(this.usersUrl, user);
+  }
+
+  // test usin subscribe here for sigin account
+  signinUser(user: User): void {
+
+    // api login route - sigin function
+    const url =  environment.apiUrl + 'register/'
+    this.http.post<User>(url, user, this.httpOptions)
+    .subscribe({
+      next: res => {
+        console.log('Signin Authorized');
+        console.log('Login Authorized');
+        const credentials = { 
+          username: user.username,
+          password: user.password
+        };
+        this.authService.login(credentials);
+      },
+      error: err => {
+        console.log('ERRO: ', err.message);
+        this.handleError<any>('sigin');
+        if(err.status == 403) { alert('Nome de Usuário já em uso.')}
+        else {
+          alert('Erro no servidor.')
+        }        
+      }
+      })
   }
 
   deleteUser(id: string): Observable<{}> {
