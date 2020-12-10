@@ -70,7 +70,7 @@ export class UserService {
 
   createUser(user: User): Observable<User> {
 
-    // api login route - register function
+    // api login route - sigin function
     const url =  environment.apiUrl + 'register/'
     return this.http.post<User>(url, user, this.httpOptions)
       .pipe(
