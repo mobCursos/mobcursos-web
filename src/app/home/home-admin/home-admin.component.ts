@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { CategoryService } from 'src/app/courses/category.service';
 import { CourseService } from 'src/app/courses/course.service';
 import { Course } from 'src/app/courses/interfaces/course';
 import { User } from 'src/app/users/interfaces/user';
@@ -16,6 +17,7 @@ export class HomeAdminComponent implements OnInit {
   constructor(
     public userService: UserService,
     public courseService: CourseService,
+    public categoryService: CategoryService
   ) { }
 
   totalUsers: number;
@@ -23,8 +25,7 @@ export class HomeAdminComponent implements OnInit {
   totalUsersTeacher: number;
   totalUsersStudent: number;
   totalCourses: number;
-  users: User[];
-  courses: Course[];
+  totalCategories: number;
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
@@ -38,6 +39,10 @@ export class HomeAdminComponent implements OnInit {
     
     this.courseService.getCourses(true).subscribe(
       courses => this.totalCourses = courses.length
+    );
+
+    this.categoryService.getCategories().subscribe(
+      categories => this.totalCategories = categories.length  
     );
     
   }

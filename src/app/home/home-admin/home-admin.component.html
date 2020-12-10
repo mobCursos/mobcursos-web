@@ -1,55 +1,64 @@
+<h2 class="ml-3 pt-4">Painel do Administrador</h2>
 <div class="container-admin">
+  
   <div class="container-item">
-    <h2 class="ml-3 pt-4">Painel do Administrador</h2>
-    <div class="container-buttons m-5">
-      <div class="mb-5">
-        <h3>Usuários cadastrados</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Categoria</th>
-              <th class="quantity">Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Administradores</td><td class="quantity">{{totalUsersAdmin}}</td></tr>
-            <tr><td>Professores</td><td class="quantity">{{totalUsersTeacher}}</td></tr>
-            <tr><td>Alunos</td><td class="quantity">{{totalUsersStudent}}</td></tr>
-            <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalUsers}}</strong></td></tr>
-          </tbody>
-        </table>
+    <h3>Usuários</h3>
+    <button type="button" routerLink="/users" routerLinkActive="active"
+    class="btn btn-primary btn-lg mb-2">
+    Gerenciar Usuários
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Perfil</th>
+          <th class="quantity">Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Administradores</td><td class="quantity">{{totalUsersAdmin}}</td></tr>
+        <tr><td>Professores</td><td class="quantity">{{totalUsersTeacher}}</td></tr>
+        <tr><td>Alunos</td><td class="quantity">{{totalUsersStudent}}</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalUsers}}</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
 
-        <button type="button" routerLink="/users" routerLinkActive="active"
-        class="btn btn-primary btn-lg">
-        Gerenciar Usuários
-        </button>
-      </div>
-      <hr class="my-4">
-      <div class="mb-5">
-        <h3>Cursos cadastrados</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Categoria</th>
-              <th class="quantity">Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalCourses}}</strong></td></tr>
-          </tbody>
-        </table>
+  <div class="container-item">
+    <h3>Cursos</h3>
+    <button type="button" routerLink="/courses" routerLinkActive="active"
+    class="btn btn-primary btn-lg mb-2">
+    Gerenciar Cursos
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th class="quantity">Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalCourses}}</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
 
+  <div class="container-item">
+    <h3>Categorias</h3>
+    <button type="button" routerLink="/courses/categories" routerLinkActive="active"
+    class="btn btn-primary btn-lg mb-2">
+    Gerenciar Categorias
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th class="quantity">Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>TOTAL</strong></td><td class="quantity"><strong>{{totalCategories}}</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
 
-        <button type="button" routerLink="/courses" routerLinkActive="active"
-        class="btn btn-primary btn-lg mr-2 mb-1">
-        Gerenciar Cursos
-        </button>
-
-        <button type="button" routerLink="/courses/categories" routerLinkActive="active"
-        class="btn btn-secondary btn-lg mr-2 mb-1">
-        Gerenciar Categorias
-        </button>
-      </div>
-    </div>
-  </div> 
 </div>
